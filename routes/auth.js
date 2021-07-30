@@ -16,6 +16,7 @@ import ProfileOptionsAuth from './profileOptionsAuth'
 import AuthTitle from './authTitle'
 import ContactUs from '../Screens/authScreens/contactUs'
 import AboutUs from '../Screens/authScreens/aboutUs'
+import HomeReview from '../Screens/appScreens/reviewsTabScreens/reviewHome'
 
 const AuthStack = createStackNavigator()
 
@@ -67,6 +68,8 @@ export default function AuthStackScreens() {
             <AuthStack.Screen name="dashboard" component={DashBoard} options={dashboardScreensStyles} />
             <AuthStack.Screen name="aboutUs" component={AboutUs} options={dashboardScreensStyles} />
             <AuthStack.Screen name="contactUs" component={ContactUs} options={dashboardScreensStyles} />
+            {/* <AuthStack.Screen name="review" component={HomeReview} options={authScreensStyles} /> */}
+
         </AuthStack.Navigator>
     )
 }

@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import HelpLogo from 'react-native-vector-icons/FontAwesome'
-import { View, Modal, StyleSheet, TouchableOpacity, Text } from 'react-native'
+import { View, Modal, StyleSheet, TouchableOpacity, Text ,Dimensions} from 'react-native'
 import ProfileLogo from 'react-native-vector-icons/FontAwesome'
 import DropDownIcon from 'react-native-vector-icons/AntDesign'
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Width, Height } from '../Helper/Dimensions';
+import SettingsStackScreen from './settingsTab';
+import ReviewStackScreen from './reviewsTab'
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeReview from '../Screens/appScreens/reviewsTabScreens/reviewHome'
+import { Props } from 'react-native-image-zoom-viewer/built/image-viewer.type'
+
+
+
+const ReviewStack = createStackNavigator();
+
 
 export default function ProfileOptions() {
 	
@@ -55,7 +66,21 @@ export default function ProfileOptions() {
            screen:'login'
         })
         
-    };                      
+    };
+    
+    const gotoReviews = () => {
+        // return <ReviewStackScreen />
+        navigation.navigate('account',{screen:'Review'})
+    }
+    const gotoSettings = () => {
+        navigation.navigate('account',{screen:'Settings'})
+    }
+    const gotoprofile = () => {
+        navigation.navigate('account',{screen:'Profile'})
+    }
+    const gotoSubscriptions = () => {
+        navigation.navigate('account',{screen:'Subscription'})
+    }
 
     return (
         <View style={{ flexDirection: 'row', right: 20 }} >
@@ -67,10 +92,10 @@ export default function ProfileOptions() {
                          style={{marginLeft:20}}
                          color="#28899B" size={30} onPress={() => setShowOptions(true)}/>
          }
-            
          {isLoggedIn &&   
             <DropDownIcon name="caretdown" color="#28899B" size={10} style={{ paddingTop: 15, paddingLeft: 5 }} />
-         }
+            }
+            
 
             <Modal
                 animationType="fade"
@@ -86,6 +111,18 @@ export default function ProfileOptions() {
                         <TouchableOpacity onPress={logout}>
                             <Text style={styles.modalText}>Logout</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity onPress={gotoReviews}>
+                            <Text style={styles.modalText}>Review</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={gotoSettings}>
+                            <Text style={styles.modalText}>Settings</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={gotoprofile}>
+                            <Text style={styles.modalText}>Profile</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={gotoSubscriptions}>
+                            <Text style={styles.modalText}>Subs</Text>
+                         </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -128,8 +165,8 @@ const styles = StyleSheet.create({
 
     },
     menuModalView: {
-        width: 100,
-        height: 40,
+        width: Width/3.5,
+        height: Height /5,
         backgroundColor: '#fefefe',
         borderRadius: 5,
         position: 'absolute',

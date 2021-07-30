@@ -67,7 +67,6 @@ export default function HomeReview() {
 
     return (
         <ScrollView>
-        
             {
                 loading &&
                 <View style={{ height: '100%', width: '100%', alignItems: 'center' }}>

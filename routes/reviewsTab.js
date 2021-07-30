@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeReview from '../Screens/appScreens/reviewsTabScreens/reviewHome'
-import { Image } from 'react-native'
+import { Image, View } from 'react-native'
 import appLogo from '../assets/images/FYLogo.png'
 import ProfileOptions from './profileOptions'
 
@@ -26,9 +26,12 @@ export default function ReviewStackScreen() {
     }
     return (
         <ReviewStack.Navigator>
-            <ReviewStack.Screen name="home" component={HomeReview} options={headerOptions} />
+            <ReviewStack.Screen name="Review" component={HomeReview}
+                // options={headerOptions}
+            />
            
         </ReviewStack.Navigator>
+        // <HomeReview/>
     )
 }
 

@@ -7,8 +7,10 @@ import SubcriptionStackScreen from './subcriptionTab'
 import SettingsStackScreen from './settingsTab'
 import ProfileStackScreen from './profileTab'
 import ReviewStackScreen from './reviewsTab'
+import HomeReview from '../Screens/appScreens/reviewsTabScreens/reviewHome'
 import HomeIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import EnquireIcon from 'react-native-vector-icons/Feather'
+import Cases from '../Screens/Cases/Index'
 import SettingsIcon from 'react-native-vector-icons/Ionicons'
 import ProfileIcon from 'react-native-vector-icons/FontAwesome'
 import ReviewIcon from 'react-native-vector-icons/Fontisto'
@@ -50,6 +52,17 @@ function HomeTabs() {
                     ),
                 }} />
             <Tab.Screen
+                name="Cases"
+                component={Cases}
+                options={{
+                    unmountOnBlur: true,
+                    tabBarLabel: <Text style={{ fontSize: 10 }}>Cases</Text>,
+                    tabBarIcon: ({ color, size }) => (
+                        <EnquireIcon name="monitor" size={17} color={color} />
+                    ),
+                }} />
+            
+            {/* <Tab.Screen
                 name="Subcriptions"
                 component={SubcriptionStackScreen}
                 options={{
@@ -68,8 +81,8 @@ function HomeTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <SettingsIcon name="settings-sharp" size={17} color={color} />
                     ),
-                }} />
-            <Tab.Screen
+                }} /> */}
+            {/* <Tab.Screen
                 name="Reviews"
                 component={ReviewStackScreen}
                 options={{
@@ -78,8 +91,8 @@ function HomeTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <ReviewIcon color={color} name="commenting" size={17} color={color} />
                     ),
-                }} />
-            <Tab.Screen
+                }} /> */}
+            {/* <Tab.Screen
                 name="Profile"
                 component={ProfileStackScreen}
                 options={{
@@ -88,7 +101,7 @@ function HomeTabs() {
                     tabBarIcon: ({ color, size }) => (
                         <ProfileIcon name="user-o" size={17} color={color} />
                     ),
-                }} />
+                }} /> */}
 
         </Tab.Navigator>
     );
