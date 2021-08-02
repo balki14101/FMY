@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { View,StyleSheet,Text, TouchableOpacity } from 'react-native';
 import { SearchBar } from 'react-native-elements';
-import { Width } from '../../Helper/Dimensions';
 import AddIcon from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native';
+//import constants
+import colors from '../../Helper/Colors';
+import { Width } from '../../Helper/Dimensions';
+
 
 
 export default function Index() {
@@ -22,14 +25,14 @@ export default function Index() {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <View style={{flexDirection:'row',justifyContent:'space-evenly',alignItems:'center',padding:10}}>
+        <View style={styles.container}>
+            <View style={styles.view}>
               <SearchBar
                placeholder="Type Here..."
                onChangeText={updateSearch}
                 value={search}
-                containerStyle={{borderTopColor:'#f6f6f6', borderBottomColor:'#f6f6f6',backgroundColor:'#f6f6f6'}}
-                inputContainerStyle={{borderRadius:10,backgroundColor:'#ffffff',width:Width/1.2}}    
+                containerStyle={styles.containerStyle}
+                inputContainerStyle={styles.inputContainerStyle}    
           />
           <TouchableOpacity onPress={gotoAddCase}>
             <AddIcon name="add" size={30} color="#808080" />
@@ -38,6 +41,25 @@ export default function Index() {
         </View>
     );
 }
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  view: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    padding: 10
+  },
+  containerStyle: {
+    borderTopColor: colors.bg,
+    borderBottomColor: colors.bg,
+    backgroundColor: colors.bg
+  },
+  inputContainerStyle: {
+    borderRadius: 10,
+    backgroundColor: colors.white,
+    width: Width / 1.2
+  }
     
 })

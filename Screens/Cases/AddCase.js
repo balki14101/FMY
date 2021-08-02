@@ -2,8 +2,11 @@ import React, {useState} from 'react'
 import { Text, View ,StyleSheet, TouchableOpacity} from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native-gesture-handler';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
+//import Constants
 import { Height, Width } from '../../Helper/Dimensions';
+import colors from '../../Helper/Colors';
+import categories from '../../Helper/Constants';
 
 
 export function AddCase() {
@@ -15,15 +18,14 @@ export function AddCase() {
     const navigation = useNavigation();  
 
 
-    const categories = ['Civil', 'Criminal', 'Intellectual Property', 'Family', 'Property', 'Immigration', 'Labour', 'Employment', 'Mergers and Acquisition', 'Bankruptcy Lawyer', 'Corporate', 'Notary', 'Others',]
     gotoAddEvents = () => {
         navigation.navigate('AddEvents')
     }
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.View}>
-                <Text style={{ color: 'red' }}> Client Name </Text>
-                <Text style={{ color: 'red' }}> : </Text>
+                <Text style={{ color: colors.black }}> Client Name </Text>
+                <Text style={{ color: colors.black }}> : </Text>
                 <TextInput
                     placeholder="Name"
                     style={styles.input}
@@ -33,8 +35,8 @@ export function AddCase() {
 
             </View>
             <View style={styles.View}>
-                <Text style={{ color: 'red' }}> Case # </Text>
-                <Text style={{ color: 'red' }}>          : </Text>
+                <Text style={{ color: colors.black }}> Case # </Text>
+                <Text style={{ color: colors.black }}>          : </Text>
                 <TextInput
                     placeholder="Case"
                     style={styles.input}
@@ -44,8 +46,8 @@ export function AddCase() {
 
             </View>
             <View style={styles.View}>
-                <Text style={{ color: 'red' }}> File # </Text>
-                <Text style={{ color: 'red' }}>              : </Text>
+                <Text style={{ color: colors.black }}> File # </Text>
+                <Text style={{ color: colors.black }}>              : </Text>
                 <TextInput
                     placeholder="File"
                     style={styles.input}
@@ -55,19 +57,19 @@ export function AddCase() {
 
             </View>
             <View style={styles.View}>
-                <Text style={{ color: 'red'}}>Type </Text>
-                <Text style={{ color: 'red' }}>        :</Text>
-                <View style={{backgroundColor:'#ffffff',borderRadius:8}}>
+                <Text style={{ color: colors.black}}>Type </Text>
+                <Text style={{ color: colors.black }}>        :</Text>
+                <View style={{backgroundColor:colors.white,borderRadius:8}}>
                 <Picker
                 selectedValue={selectedValue}
                 style={{height: Height/14, width: Width/2 }}
                 onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                > 
-                    <Picker.Item label={categories[0]} value={categories[0]} />
+                    >
+                {categories.map(category => {return<Picker.Item label={category.n} value={category.n} />})}
                  </Picker>
                 </View>
             </View>
-            <View style={[styles.View,{margin:25}]}>
+            <View style={[styles.View,{margin:30}]}>
                 <TouchableOpacity onPress={gotoAddEvents} style={styles.buttons}><Text>Add Events</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.buttons}><Text>Save</Text></TouchableOpacity>
 
@@ -80,7 +82,8 @@ const styles = StyleSheet.create({
     View: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-         alignItems: 'center'
+        alignItems: 'center',
+         marginTop:10
     },
   input: {
         height: Height/16,

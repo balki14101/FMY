@@ -108,8 +108,8 @@ export default function ProfileOptions() {
                         setShowOptions(!showOptions);
                     }}>
                     <View style={styles.menuModalView}>                        
-                        <TouchableOpacity onPress={logout}>
-                            <Text style={styles.modalText}>Logout</Text>
+                        <TouchableOpacity onPress={gotoprofile}>
+                            <Text style={styles.modalText}>Profile</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={gotoReviews}>
                             <Text style={styles.modalText}>Review</Text>
@@ -117,12 +117,12 @@ export default function ProfileOptions() {
                         <TouchableOpacity onPress={gotoSettings}>
                             <Text style={styles.modalText}>Settings</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={gotoprofile}>
-                            <Text style={styles.modalText}>Profile</Text>
-                        </TouchableOpacity>
                         <TouchableOpacity onPress={gotoSubscriptions}>
                             <Text style={styles.modalText}>Subs</Text>
-                         </TouchableOpacity>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={logout}>
+                            <Text style={styles.modalText}>Logout</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>

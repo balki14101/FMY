@@ -58,7 +58,7 @@ function HomeTabs() {
                     unmountOnBlur: true,
                     tabBarLabel: <Text style={{ fontSize: 10 }}>Cases</Text>,
                     tabBarIcon: ({ color, size }) => (
-                        <EnquireIcon name="monitor" size={17} color={color} />
+                        <EnquireIcon name="book" size={17} color={color} />
                     ),
                 }} />
             
