@@ -156,7 +156,7 @@ export function AddEvent() {
         </View>
         
         <View style={styles.view} >
-          <TouchableOpacity style={styles.buttons}  >
+          <TouchableOpacity style={styles.buttons} onPress={() => {navigation.navigate('Cases')}}  >
                 <Text style={styles.btnText}>Save</Text>
               </TouchableOpacity>
         </View>

@@ -18,8 +18,8 @@ export function AddCase() {
     const navigation = useNavigation();  
 
 
-    gotoAddEvents = () => {
-        navigation.navigate('AddEvents')
+    gotoCases = () => {
+        navigation.navigate('Cases')
     }
     return (
         <View style={{ flex: 1 }}>
@@ -70,7 +70,7 @@ export function AddCase() {
                 </View>
             </View>
             <View style={[styles.View,{margin:30}]}>
-                <TouchableOpacity onPress={gotoAddEvents} style={styles.buttons}><Text>Add Events</Text></TouchableOpacity>
+                <TouchableOpacity onPress={gotoCases} style={styles.buttons}><Text>Add Case</Text></TouchableOpacity>
                 <TouchableOpacity style={styles.buttons}><Text>Save</Text></TouchableOpacity>
 
             </View>

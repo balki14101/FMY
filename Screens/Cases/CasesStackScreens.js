@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CaseHome from './CaseHome'
 import AddCase from './AddCase';
 import AddEvents from './AddEvents'
+import CaseDetails from './CaseDetails'
 
 
 
@@ -18,6 +19,7 @@ export default function CasesStackScreens()  {
       <CaseStack.Screen name="Cases" component={CaseHome} />
       <CaseStack.Screen name="AddCase" component={AddCase} />
       <CaseStack.Screen name="AddEvents" component={AddEvents} />
+      <CaseStack.Screen name="CaseDetails" component={CaseDetails} />
     </CaseStack.Navigator>
     
   )
