@@ -30,13 +30,16 @@ function CaseDetails() {
 
     const tableHead = ['Event', 'Date', 'Document'];
     const tableData = [
-    ['1', 'Name1', '1/3'],
-    ['2', 'Name2', '1/1'],
-    ['3', 'Name3', '2/3'],
-    ['4', 'Name4', '2/2']
+    ['Vakalat', '1-Oct-21', 'Doc.pdf'],
+    ['Hearing', '10-Oct-21', 'Doc.pdf'],
+    ['Application', '21-Oct-21', 'Doc.pdf'],
+    ['Order', '1-Nov-21', 'Doc.pdf']
   ];
 
     const navigation = useNavigation();
+
+    const gotoCaseHome = () => navigation.navigate('Cases')
+    const gotoAddEvents = () => navigation.navigate('AddEvents')
     return (
         <ScrollView>
             <View style={{ flex: 1 }}>
@@ -94,14 +97,20 @@ function CaseDetails() {
                         onChangeText={onChangeText3}
                         value={text3}
                     />
-
-                </View>
+                 </View>
                 <View>
                       <Table borderStyle={{borderColor: 'transparent'}}>
-                         <Row data={tableHead} style={styles.head} textStyle={styles.text1}/>
+                        <Row data={tableHead} style={styles.head} textStyle={[styles.text1,{fontWeight:'bold'}]}/>
                             <Rows data={tableData} textStyle={styles.text1}/>
                      </Table>
-
+                </View>
+                <View style={styles.view}>
+                    <TouchableOpacity style={styles.buttons} onPress={gotoAddEvents}>
+                        <Text>Add Events</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.buttons} onPress={gotoCaseHome}>
+                        <Text>Save</Text>
+                    </TouchableOpacity>
                 </View>
                
             </View>
@@ -147,7 +156,13 @@ const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold'
     },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  text1: { margin: 6,textAlign:'center' }
+    head: {
+        height: 40,
+        backgroundColor: '#f1f8ff'
+    },
+    text1: {
+        margin: 6,
+        textAlign: 'center',
+    }
 });
     export default CaseDetails

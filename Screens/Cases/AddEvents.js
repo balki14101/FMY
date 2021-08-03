@@ -53,7 +53,7 @@ export function AddEvent() {
         });
     }
 
-
+    const gotoCaseDetails =() => {navigation.navigate('CaseDetails')}
     gotoAddEvents = () => {
         navigation.navigate('AddEvents')
     }
@@ -156,7 +156,7 @@ export function AddEvent() {
         </View>
         
         <View style={styles.view} >
-          <TouchableOpacity style={styles.buttons} onPress={() => {navigation.navigate('Cases')}}  >
+          <TouchableOpacity style={styles.buttons} onPress={gotoCaseDetails}  >
                 <Text style={styles.btnText}>Save</Text>
               </TouchableOpacity>
         </View>

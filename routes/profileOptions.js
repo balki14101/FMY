@@ -165,7 +165,8 @@ const styles = StyleSheet.create({
 
     },
     menuModalView: {
-        width: Width/3.5,
+        paddingHorizontal:5,
+        width: Width/5,
         height: Height /5,
         backgroundColor: '#fefefe',
         borderRadius: 5,
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
         right: 5,
         top: 5,
         marginTop: 50,
-        marginRight: 15,
+        // marginRight: 15,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
 
     },
     modalText: {
-        textAlign: "center",
+        textAlign: "left",
         fontSize: 12,
         color: 'black',
         fontFamily: 'roboto_medium',
