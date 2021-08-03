@@ -15,11 +15,16 @@ const CaseStack = createStackNavigator();
 export default function CasesStackScreens()  {
   return (
 
-    <CaseStack.Navigator>
+    <CaseStack.Navigator
+    screenOptions={{
+        headerTintColor: '#000000',
+        headerTitleAlign:'center'
+      }}
+    >
       <CaseStack.Screen name="Cases" component={CaseHome} />
       <CaseStack.Screen name="AddCase" component={AddCase} />
       <CaseStack.Screen name="AddEvents" component={AddEvents} />
-      <CaseStack.Screen name="CaseDetails" component={CaseDetails} />
+      <CaseStack.Screen name="Case Details" component={CaseDetails} />
     </CaseStack.Navigator>
     
   )

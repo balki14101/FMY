@@ -33,7 +33,7 @@ function CaseDetails() {
     ['Vakalat', '1-Oct-21', 'Doc.pdf'],
     ['Hearing', '10-Oct-21', 'Doc.pdf'],
     ['Application', '21-Oct-21', 'Doc.pdf'],
-    ['Order', '1-Nov-21', 'Doc.pdf']
+    // ['Order', '1-Nov-21', 'Doc.pdf']
   ];
 
     const navigation = useNavigation();
@@ -99,9 +99,10 @@ function CaseDetails() {
                     />
                  </View>
                 <View>
+                    <Text style={[styles.text,{marginLeft:24,fontSize:16,color:'#1E94A3'}]}>Events</Text>
                       <Table borderStyle={{borderColor: 'transparent'}}>
                         <Row data={tableHead} style={styles.head} textStyle={[styles.text1,{fontWeight:'bold'}]}/>
-                            <Rows data={tableData} textStyle={styles.text1}/>
+                        <Rows data={tableData} textStyle={styles.text1}/>
                      </Table>
                 </View>
                 <View style={styles.view}>

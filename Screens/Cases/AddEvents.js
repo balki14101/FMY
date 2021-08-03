@@ -53,7 +53,7 @@ export function AddEvent() {
         });
     }
 
-    const gotoCaseDetails =() => {navigation.navigate('CaseDetails')}
+    const gotoCaseDetails =() => {navigation.navigate('Case Details')}
     gotoAddEvents = () => {
         navigation.navigate('AddEvents')
     }
@@ -92,7 +92,30 @@ export function AddEvent() {
                     value={text3}
                 />
 
-            </View>
+        </View>
+        <View style={styles.view}>
+          <Text style={styles.text}> Select Date </Text>
+          <Text style={styles.text}>     : </Text>
+          <DatePicker
+            mode='date'
+            useNativeDriver={false}
+            format="DD-MM-YYYY"
+            customStyles={{
+            dateIcon: {
+              // display: 'none',
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0,
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+            date={date}
+            onDateChange={setDate}
+          />
+        </View>
             <View style={styles.view}>
                 <Text style={styles.text}>Select Events </Text>
                 <Text style={styles.text}>:</Text>
@@ -118,29 +141,7 @@ export function AddEvent() {
                     value={others}
           />
         </View>
-        <View style={styles.view}>
-          <Text style={styles.text}> Select Date </Text>
-          <Text style={styles.text}>     : </Text>
-          <DatePicker
-            mode='date'
-            useNativeDriver={false}
-            format="DD-MM-YYYY"
-            customStyles={{
-            dateIcon: {
-              // display: 'none',
-              position: 'absolute',
-              left: 0,
-              top: 4,
-              marginLeft: 0,
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-            date={date}
-            onDateChange={setDate}
-          />
-        </View>
+        
         <View>
           <Text style={styles.text}> Upload Documents : </Text>
           <View style={styles.view}>
@@ -155,7 +156,7 @@ export function AddEvent() {
           </View>
         </View>
         
-        <View style={styles.view} >
+        <View style={[styles.view,{paddingBottom:20}]} >
           <TouchableOpacity style={styles.buttons} onPress={gotoCaseDetails}  >
                 <Text style={styles.btnText}>Save</Text>
               </TouchableOpacity>

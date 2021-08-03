@@ -12,7 +12,7 @@ import { Height, Width } from '../../Helper/Dimensions';
 export default function Index() {
   const [search, setSearch] = useState('');
 //Table
-  const tableHead = ['#', 'Client', 'Case', 'Type', 'Next Date'];
+  const tableHead = ['#', 'Client', 'Case #', 'Type', 'Next Date'];
   const tableData = [
     ['1', 'Name1', '1/3', 'Property','5-1-2001'],
     ['2', 'Name2', '1/1', 'Crime','5-1-2001'],
@@ -33,7 +33,7 @@ export default function Index() {
   };
 
   //Navigating to Case details screen
-  const gotoCaseDetails= () => navigation.navigate('CaseDetails')
+  const gotoCaseDetails= () => navigation.navigate('Case Details')
 
     _alertIndex = (index) => {
     Alert.alert(`This is row ${index + 1}`);
@@ -58,18 +58,20 @@ export default function Index() {
                 inputContainerStyle={styles.inputContainerStyle}    
           />
           <TouchableOpacity onPress={gotoAddCase}>
-            <AddIcon name="add" size={30} color="#808080" />
+            <View style={{backgroundColor:'#1E94A3',borderRadius:50}}>
+              <AddIcon name="add" size={30} color="#f6f6f6" />
+            </View>
           </TouchableOpacity>
         </View>
         <View style={{marginTop:10}}>
           <Table  borderStyle={{borderColor: 'transparent'}}>
-          <Row flexArr={[1,2,1,2,2]} data={tableHead} style={styles.head} textStyle={styles.headertext}/>
+          <Row flexArr={[1,2,2,2,2]} data={tableHead} style={styles.head} textStyle={styles.headertext}/>
           {
             tableData.map((rowData, index) => (
-              <TableWrapper key={index} style={styles.row}>
-                {
+              <TableWrapper key={index}  style={styles.row}>
+                { 
                   rowData.map((cellData, cellIndex) => (
-                    <Cell key={cellIndex} data={cellIndex === 4 ? element(cellData, index) : cellData }   textStyle={styles.celltext}/>
+                    <Cell key={cellIndex} data={cellIndex === 4 ? element(cellData, index) : cellData  }  textStyle={styles.celltext}/>
                   ))
                 }
               </TableWrapper>
@@ -104,16 +106,17 @@ const styles = StyleSheet.create({
     width: Width / 1.2
   },
   head: {
-    height: Height/20,
+    height: Height/15,
     backgroundColor: '#808B97'
   },
   headertext: {
     margin: 6,
-    textAlign: 'center',
+    // textAlign:'left',
     fontWeight:'bold'
   },
   celltext: {
-    margin: 6
+    marginVertical: 6,
+    // textAlign:'center'
   },
   row: {
     flexDirection: 'row'
