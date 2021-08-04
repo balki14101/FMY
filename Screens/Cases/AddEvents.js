@@ -161,8 +161,8 @@ export function AddEvent() {
         </View>
         
         <View>
-          <UploadDoc/>
-          {/* <Text style={styles.text}> Upload Documents : </Text>
+          {/* <UploadDoc/> */}
+          <Text style={styles.text}> Upload Documents : </Text>
           <View style={styles.view}>
           <Image style={{ height: 100, width: 100 }} source={{ uri: image }} />
                <TouchableOpacity  onPress={chooseImageFromGallery} style={styles.buttons}  >
@@ -172,7 +172,7 @@ export function AddEvent() {
               <TouchableOpacity  onPress={chooseImageFromCamera} style={styles.buttons}   >
                 <Text style={styles.btnText}>From Camera</Text>
               </TouchableOpacity>       
-          </View> */}
+          </View>
         </View>
         
         <View style={[styles.view,{paddingBottom:20}]} >
