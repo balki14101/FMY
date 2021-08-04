@@ -24,46 +24,46 @@ export function AddCase() {
     return (
         <View style={{ flex: 1 }}>
             <View style={styles.View}>
-                <Text style={{ color: colors.black }}> Client Name </Text>
-                <Text style={{ color: colors.black }}> : </Text>
+                <Text style={[styles.text,{flex:2}]}> Client Name </Text>
+                <Text style={[styles.text,{flex:0.8}]}> : </Text>
                 <TextInput
                     placeholder="Name"
-                    style={styles.input}
+                    style={[styles.input,{flex:3}]}
                     onChangeText={onChangeText1}
                     value={text1}
                 />
 
             </View>
             <View style={styles.View}>
-                <Text style={{ color: colors.black }}> Case # </Text>
-                <Text style={{ color: colors.black }}>          : </Text>
+                <Text style={[styles.text,{flex:2}]}> Case # </Text>
+                <Text style={[styles.text,{flex:0.8}]}> : </Text>
                 <TextInput
                     placeholder="Case"
-                    style={styles.input}
+                    style={[styles.input,{flex:3}]}
                     onChangeText={onChangeText2}
                     value={text2}
                 />
 
             </View>
             <View style={styles.View}>
-                <Text style={{ color: colors.black }}> File # </Text>
-                <Text style={{ color: colors.black }}>              : </Text>
+                <Text style={[styles.text,{flex:2}]}> File # </Text>
+                <Text style={[styles.text,{flex:0.8}]}> : </Text>
                 <TextInput
                     placeholder="File"
-                    style={styles.input}
+                    style={[styles.input,{flex:3}]}
                     onChangeText={onChangeText3}
                     value={text3}
                 />
 
             </View>
             <View style={styles.View}>
-                <Text style={{ color: colors.black}}>Type </Text>
-                <Text style={{ color: colors.black }}>        :</Text>
-                <View style={{backgroundColor:colors.white,borderRadius:8}}>
+                <Text style={[styles.text,{flex:2}]}>Type </Text>
+                <Text style={[styles.text,{flex:1}]}> :</Text>
+                <View style={{backgroundColor:colors.white,borderRadius:8,flex:3.4,marginRight:12,marginBottom:8}}>
                 <Picker
                 selectedValue={selectedValue}
-                style={{height: Height/14, width: Width/2 }}
-                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+                style={{height: Height/16, width: Width/2 }}
+                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue,itemIndex)}
                     >
                 {categories.map(category => {return<Picker.Item label={category.n} value={category.n} />})}
                  </Picker>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-         marginTop:10
+         marginTop:10,paddingHorizontal:10
     },
   input: {
         height: Height/16,
@@ -101,7 +101,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 8
       
-  }
+    },
+    text: {
+    color: colors.black,
+    fontWeight: 'bold'
+    },
 });
 
 export default AddCase

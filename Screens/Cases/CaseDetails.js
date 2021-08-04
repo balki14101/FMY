@@ -6,6 +6,7 @@ import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-datepicker';
 import ImagePicker from "react-native-customized-image-picker";
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import Icon from 'react-native-vector-icons/Feather'
 // import ImagePicker from 'react-native-image-crop-picker';
 //constants
 import { Height, Width } from '../../Helper/Dimensions';
@@ -43,63 +44,72 @@ function CaseDetails() {
     return (
         <ScrollView>
             <View style={{ flex: 1 }}>
-                <View style={styles.view}>
-                    <Text style={styles.text}> Client Name </Text>
-                    <Text style={styles.text}> : </Text>
+                <View style={[styles.view,{paddingHorizontal:25}]}>
+                    <Text style={[styles.text, {flex:2}]}> Client Name </Text>
+                    <Text style={[styles.text, {flex:0.8}]}> : </Text>
                     <TextInput
                         placeholder="Name"
-                        style={styles.input}
+                        style={[styles.input, {flex:2.4}]}
                         onChangeText={onChangeText1}
                         value={text1}
                     />
+                    <Icon name="edit" />
 
                 </View>
-                 <View style={styles.view}>
-          <Text style={styles.text}> Case Start Date </Text>
-          <Text style={styles.text}>          : </Text>
+                 <View style={[styles.view,{paddingHorizontal:25}]}>
+                    <Text style={[styles.text, {flex:2}]}> Case Start Date </Text>
+                    <Text style={[styles.text, { flex: 1.2}]}> :</Text>
           <DatePicker
             mode='date'
             useNativeDriver={false}
             format="DD-MM-YYYY"
             customStyles={{
+                
             dateIcon: {
-              display: 'none',
-            //   position: 'relative',
+            //   display: 'none',
+              position: 'relative',
             //   left: 0,
             //   top: 4,
             //   marginLeft: 0,
+              
             },
             dateInput: {
-              marginLeft: 25,
-            },
+            //   marginLeft: 25,
+                // margin: 1,
+                // height: Height / 16,
+                borderRadius: 8,
+                // flex:2
+                },
           }}
             date={date}
             onDateChange={setDate}
-          />
+                        />
         </View>
-                <View style={styles.view}>
-                    <Text style={styles.text}> Case # </Text>
-                    <Text style={styles.text}>          : </Text>
+                <View style={[styles.view,{paddingHorizontal:25}]}>
+                    <Text style={[styles.text,{flex:2}]}> Case # </Text>
+                    <Text style={[styles.text,{flex:0.8}]}>:</Text>
                     <TextInput
                         placeholder="Case"
-                        style={styles.input}
+                        style={[styles.input,{flex:2.5}]}
                         onChangeText={onChangeText2}
                         value={text2}
                     />
 
                 </View>
-                <View style={styles.view}>
-                    <Text style={styles.text}> File # </Text>
-                    <Text style={styles.text}>              : </Text>
+                <View style={[styles.view,{paddingHorizontal:25}]}>
+                    <Text style={[styles.text,{flex:2}]}> File # </Text>
+                    <Text style={[styles.text,{flex:0.8}]}>: </Text>
                     <TextInput
                         placeholder="File"
-                        style={styles.input}
+                        style={[styles.input,{flex:2.5}]}
                         onChangeText={onChangeText3}
                         value={text3}
                     />
-                 </View>
+                </View>
+                <View style={{alignItems:'center',paddingVertical:10,marginTop:10,backgroundColor:'#FFF1C1'}}>
+                        <Text style={[styles.text, { fontSize: 16, color: '#1E94A3' }]}>Events</Text>
+                    </View>    
                 <View>
-                    <Text style={[styles.text,{marginLeft:24,fontSize:16,color:'#1E94A3'}]}>Events</Text>
                       <Table borderStyle={{borderColor: 'transparent'}}>
                         <Row data={tableHead} style={styles.head} textStyle={[styles.text1,{fontWeight:'bold'}]}/>
                         <Rows data={tableData} textStyle={styles.text1}/>
@@ -128,9 +138,9 @@ const styles = StyleSheet.create({
     },
   input: {
         height: Height/16,
-        width: Width / 2,
+        // width: Width / 4,
         backgroundColor:'white',
-        margin: 12,
+        marginTop: 12,
         borderRadius:4,
         padding: 10,
     },

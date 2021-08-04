@@ -65,13 +65,13 @@ export default function Index() {
         </View>
         <View style={{marginTop:10}}>
           <Table  borderStyle={{borderColor: 'transparent'}}>
-          <Row flexArr={[1,2,2,2,2]} data={tableHead} style={styles.head} textStyle={styles.headertext}/>
+          <Row flexArr={[1.5,2,2,2,2]} data={tableHead} style={styles.head} textStyle={styles.headertext}/>
           {
             tableData.map((rowData, index) => (
               <TableWrapper key={index}  style={styles.row}>
                 { 
                   rowData.map((cellData, cellIndex) => (
-                    <Cell key={cellIndex} data={cellIndex === 4 ? element(cellData, index) : cellData  }  textStyle={styles.celltext}/>
+                    <Cell key={cellIndex} data={cellIndex === 4 ? element(cellData, index) : cellData  }   textStyle={styles.celltext}/>
                   ))
                 }
               </TableWrapper>
@@ -111,12 +111,15 @@ const styles = StyleSheet.create({
   },
   headertext: {
     margin: 6,
-    // textAlign:'left',
-    fontWeight:'bold'
+    textAlign:'center',
+    fontWeight: 'bold',
+    // padding:4
   },
   celltext: {
     marginVertical: 6,
-    // textAlign:'center'
+    // textAlign:'center',
+    paddingLeft: 8,
+    // paddingRight:18
   },
   row: {
     flexDirection: 'row'
