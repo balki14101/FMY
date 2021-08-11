@@ -8,22 +8,32 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 // import ImagePicker from 'react-native-image-crop-picker';
 // import Video from 'react-native-video';
+import {Height, Width} from '../../Helper/Dimensions';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    // justifyContent: 'center',
+    paddingLeft: 16,
     alignItems: 'center',
+    height: Height / 8,
+    backgroundColor: '#FFF1C1',
   },
   button: {
-    backgroundColor: 'blue',
-    marginBottom: 10,
+    height: Height / 24,
+    width: Width / 3,
+    backgroundColor: 'lightblue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    marginVertical: 8,
   },
   text: {
-    color: 'white',
-    fontSize: 20,
+    color: '#000000',
+    fontSize: 16,
     textAlign: 'center',
   },
 });
@@ -45,7 +55,7 @@ export default class UploadDoc extends Component {
       includeExif: true,
       mediaType,
     })
-      .then(image => {
+      .then((image) => {
         console.log('received image', image);
         this.setState({
           image: {
@@ -57,7 +67,7 @@ export default class UploadDoc extends Component {
           images: null,
         });
       })
-      .catch(e => alert(e));
+      .catch((e) => alert(e));
   }
 
   pickSingleBase64(cropit) {
@@ -68,7 +78,7 @@ export default class UploadDoc extends Component {
       includeBase64: true,
       includeExif: true,
     })
-      .then(image => {
+      .then((image) => {
         console.log('received base64 image');
         this.setState({
           image: {
@@ -79,7 +89,7 @@ export default class UploadDoc extends Component {
           images: null,
         });
       })
-      .catch(e => alert(e));
+      .catch((e) => alert(e));
   }
 
   cleanupImages() {
@@ -87,7 +97,7 @@ export default class UploadDoc extends Component {
       .then(() => {
         console.log('removed tmp images from tmp directory');
       })
-      .catch(e => {
+      .catch((e) => {
         alert(e);
       });
   }
@@ -104,7 +114,7 @@ export default class UploadDoc extends Component {
       .then(() => {
         console.log(`removed tmp image ${image.uri} from tmp directory`);
       })
-      .catch(e => {
+      .catch((e) => {
         alert(e);
       });
   }
@@ -122,7 +132,7 @@ export default class UploadDoc extends Component {
       width: 200,
       height: 200,
     })
-      .then(image => {
+      .then((image) => {
         console.log('received cropped image', image);
         this.setState({
           image: {
@@ -134,7 +144,7 @@ export default class UploadDoc extends Component {
           images: null,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
         Alert.alert(e.message ? e.message : e);
       });
@@ -157,7 +167,7 @@ export default class UploadDoc extends Component {
       cropperActiveWidgetColor: 'white',
       cropperToolbarWidgetColor: '#3498DB',
     })
-      .then(image => {
+      .then((image) => {
         console.log('received image', image);
         this.setState({
           image: {
@@ -169,7 +179,7 @@ export default class UploadDoc extends Component {
           images: null,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log(e);
         Alert.alert(e.message ? e.message : e);
       });
@@ -183,10 +193,10 @@ export default class UploadDoc extends Component {
       includeExif: true,
       forceJpg: true,
     })
-      .then(images => {
+      .then((images) => {
         this.setState({
           image: null,
-          images: images.map(i => {
+          images: images.map((i) => {
             console.log('received image', i);
             return {
               uri: i.path,
@@ -197,7 +207,7 @@ export default class UploadDoc extends Component {
           }),
         });
       })
-      .catch(e => alert(e));
+      .catch((e) => alert(e));
   }
 
   scaledHeight(oldW, oldH, newW) {
@@ -216,8 +226,8 @@ export default class UploadDoc extends Component {
           volume={1}
           muted={false}
           resizeMode={'cover'}
-          onError={e => console.log(e)}
-          onLoad={load => console.log(load)}
+          onError={(e) => console.log(e)}
+          onLoad={(load) => console.log(load)}
           repeat={true}
         />
       </View>
@@ -227,7 +237,7 @@ export default class UploadDoc extends Component {
   renderImage(image) {
     return (
       <Image
-        style={{width: 300, height: 300, resizeMode: 'contain'}}
+        style={{width: 150, height: 150, resizeMode: 'contain'}}
         source={image}
       />
     );
@@ -240,18 +250,26 @@ export default class UploadDoc extends Component {
 
     return this.renderImage(image);
   }
+  sampleImage() {
+    return (
+      <Image
+        style={{width: 80, height: 80, resizeMode: 'contain'}}
+        source={{uri: 'https://static.thenounproject.com/png/729367-200.png'}}
+      />
+    );
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <View>
+        <ScrollView>
           {this.state.image ? this.renderAsset(this.state.image) : null}
           {this.state.images
-            ? this.state.images.map(i => (
+            ? this.state.images.map((i) => (
                 <View key={i.uri}>{this.renderAsset(i)}</View>
               ))
-            : null}
-        </View>
+            : this.sampleImage()}
+        </ScrollView>
 
         {/* <TouchableOpacity
           onPress={() => this.pickSingleWithCamera(false)}
@@ -265,27 +283,26 @@ export default class UploadDoc extends Component {
           style={styles.button}>
           <Text style={styles.text}>Select Single Video With Camera</Text>
         </TouchableOpacity> */}
-        <TouchableOpacity
-          onPress={() => this.pickSingleWithCamera(true)}
-          style={styles.button}>
-          <Text style={styles.text}>
-            Select Single With Camera With Cropping
-          </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity
+        <View style={{flexDirection: 'column', padding: 40}}>
+          <TouchableOpacity
+            onPress={() => this.pickSingleWithCamera(true)}
+            style={styles.button}>
+            <Text style={styles.text}>Camera</Text>
+          </TouchableOpacity>
+          {/* <TouchableOpacity
           onPress={() => this.pickSingle(false)}
           style={styles.button}>
           <Text style={styles.text}>Select Single</Text>
         </TouchableOpacity> */}
-        {/* <TouchableOpacity onPress={() => this.cropLast()} style={styles.button}>
+          {/* <TouchableOpacity onPress={() => this.cropLast()} style={styles.button}>
           <Text style={styles.text}>Crop Last Selected Image</Text>
         </TouchableOpacity> */}
-        {/* <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={() => this.pickSingleBase64(false)}
           style={styles.button}>
           <Text style={styles.text}>Select Single Returning Base64</Text>
         </TouchableOpacity> */}
-        {/* <TouchableOpacity
+          {/* <TouchableOpacity
           onPress={() => this.pickSingle(true)}
           style={styles.button}>
           <Text style={styles.text}>Select Single With Cropping</Text>
@@ -295,11 +312,12 @@ export default class UploadDoc extends Component {
           style={styles.button}>
           <Text style={styles.text}>Select Single With Circular Cropping</Text>
         </TouchableOpacity> */}
-        <TouchableOpacity
-          onPress={this.pickMultiple.bind(this)}
-          style={styles.button}>
-          <Text style={styles.text}>Select Multiple</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this.pickMultiple.bind(this)}
+            style={styles.button}>
+            <Text style={styles.text}>Gallery</Text>
+          </TouchableOpacity>
+        </View>
         {/* <TouchableOpacity
           onPress={this.cleanupImages.bind(this)}
           style={styles.button}>

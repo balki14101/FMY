@@ -1,31 +1,26 @@
-import React from 'react'
+import React from 'react';
 //library
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
-//screen import 
-import CaseHome from './CaseHome'
+//screen import
+import CaseHome from './CaseHome';
 import AddCase from './AddCase';
-import AddEvents from './AddEvents'
-import CaseDetails from './CaseDetails'
-
-
+import AddEvents from './AddEvents';
+import CaseDetails from './CaseDetails';
 
 const CaseStack = createStackNavigator();
 
-export default function CasesStackScreens()  {
+export default function CasesStackScreens() {
   return (
-
     <CaseStack.Navigator
-    screenOptions={{
+      screenOptions={{
         headerTintColor: '#000000',
-        headerTitleAlign:'center'
-      }}
-    >
+        headerTitleAlign: 'center',
+      }}>
       <CaseStack.Screen name="Cases" component={CaseHome} />
-      <CaseStack.Screen name="AddCase" component={AddCase} />
-      <CaseStack.Screen name="AddEvents" component={AddEvents} />
+      <CaseStack.Screen name="Add Case" component={AddCase} />
+      <CaseStack.Screen name="Add Events" component={AddEvents} />
       <CaseStack.Screen name="Case Details" component={CaseDetails} />
     </CaseStack.Navigator>
-    
-  )
+  );
 }
