@@ -179,8 +179,13 @@ export function AddEvent() {
         </View>
 
         <View style={[styles.view, {paddingBottom: 20}]}>
+          <TouchableOpacity
+            style={styles.cancelButton}
+            onPress={gotoCaseDetails}>
+            <Text style={{color: colors.black}}>Cancel</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.buttons} onPress={gotoCaseDetails}>
-            <Text style={styles.btnText}>Save</Text>
+            <Text style={{color: colors.white}}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -207,20 +212,18 @@ const styles = StyleSheet.create({
   buttons: {
     height: Height / 16,
     width: Width / 3,
-    backgroundColor: 'lightblue',
+    backgroundColor: colors.button,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
   },
-  btnSection: {
-    width: 325,
-    height: 100,
-    backgroundColor: '#1E94A3',
-    color: 'white',
-    alignItems: 'center',
+  cancelButton: {
+    height: Height / 16,
+    width: Width / 3,
+    backgroundColor: colors.buttonbg2,
     justifyContent: 'center',
-    borderRadius: 3,
-    marginBottom: 10,
+    alignItems: 'center',
+    borderRadius: 8,
   },
   text: {
     color: colors.black,

@@ -66,7 +66,7 @@ export default function Index() {
           inputContainerStyle={styles.inputContainerStyle}
         />
         <TouchableOpacity onPress={gotoAddCase}>
-          <View style={{backgroundColor: '#1E94A3', borderRadius: 50}}>
+          <View style={{backgroundColor: colors.button, borderRadius: 50}}>
             <AddIcon name="add" size={30} color="#f6f6f6" />
           </View>
         </TouchableOpacity>

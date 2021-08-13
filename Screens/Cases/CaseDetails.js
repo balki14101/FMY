@@ -110,7 +110,7 @@ function CaseDetails() {
             marginTop: 10,
             backgroundColor: '#FFF1C1',
           }}>
-          <Text style={[styles.text, {fontSize: 16, color: '#1E94A3'}]}>
+          <Text style={[styles.text, {fontSize: 16, color: colors.button}]}>
             Events
           </Text>
         </View>
@@ -126,10 +126,10 @@ function CaseDetails() {
         </View>
         <View style={styles.view}>
           <TouchableOpacity style={styles.buttons} onPress={gotoAddEvents}>
-            <Text>Add Events</Text>
+            <Text style={{color: colors.white}}>Add Events</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttons} onPress={gotoCaseHome}>
-            <Text>Save</Text>
+            <Text style={{color: colors.white}}>Save</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   buttons: {
     height: Height / 16,
     width: Width / 3,
-    backgroundColor: 'lightblue',
+    backgroundColor: colors.button,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,

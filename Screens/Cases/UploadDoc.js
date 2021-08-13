@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import colors from '../../Helper/Colors';
 import ImagePicker from 'react-native-image-crop-picker';
 // import ImagePicker from 'react-native-image-crop-picker';
 // import Video from 'react-native-video';
@@ -15,24 +16,33 @@ import {Height, Width} from '../../Helper/Dimensions';
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
     // justifyContent: 'center',
-    paddingLeft: 16,
+    // paddingLeft: 16,
     alignItems: 'center',
-    height: Height / 8,
-    backgroundColor: '#FFF1C1',
+    // height: Height / 8,
+    // backgroundColor: '#FFF1C1',
   },
-  button: {
-    height: Height / 24,
-    width: Width / 3,
-    backgroundColor: 'lightblue',
+  cameraButton: {
+    height: Height / 20,
+    width: Width / 2,
+    backgroundColor: colors.cameraButton,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+    marginVertical: 8,
+  },
+  galleryButton: {
+    height: Height / 20,
+    width: Width / 2,
+    backgroundColor: colors.galleryButton,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
     marginVertical: 8,
   },
   text: {
-    color: '#000000',
+    color: colors.white,
     fontSize: 16,
     textAlign: 'center',
   },
@@ -268,7 +278,7 @@ export default class UploadDoc extends Component {
             ? this.state.images.map((i) => (
                 <View key={i.uri}>{this.renderAsset(i)}</View>
               ))
-            : this.sampleImage()}
+            : null}
         </ScrollView>
 
         {/* <TouchableOpacity
@@ -283,10 +293,15 @@ export default class UploadDoc extends Component {
           style={styles.button}>
           <Text style={styles.text}>Select Single Video With Camera</Text>
         </TouchableOpacity> */}
-        <View style={{flexDirection: 'column', padding: 40}}>
+        <View
+          style={{
+            flexDirection: 'column',
+            padding: 8,
+            // backgroundColor: 'red',
+          }}>
           <TouchableOpacity
             onPress={() => this.pickSingleWithCamera(true)}
-            style={styles.button}>
+            style={styles.cameraButton}>
             <Text style={styles.text}>Camera</Text>
           </TouchableOpacity>
           {/* <TouchableOpacity
@@ -314,7 +329,7 @@ export default class UploadDoc extends Component {
         </TouchableOpacity> */}
           <TouchableOpacity
             onPress={this.pickMultiple.bind(this)}
-            style={styles.button}>
+            style={styles.galleryButton}>
             <Text style={styles.text}>Gallery</Text>
           </TouchableOpacity>
         </View>
