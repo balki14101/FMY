@@ -21,66 +21,74 @@ export function AddCase() {
   };
   return (
     <View style={{flex: 1}}>
-      <View style={styles.View}>
-        <Text style={[styles.text, {flex: 2}]}> Client Name </Text>
-        <Text style={[styles.text, {flex: 0.8}]}> : </Text>
-        <TextInput
-          placeholder="Name"
-          style={[styles.input, {flex: 3}]}
-          onChangeText={onChangeText1}
-          value={text1}
-        />
-      </View>
-      <View style={styles.View}>
-        <Text style={[styles.text, {flex: 2}]}> Case # </Text>
-        <Text style={[styles.text, {flex: 0.8}]}> : </Text>
-        <TextInput
-          placeholder="Case"
-          style={[styles.input, {flex: 3}]}
-          onChangeText={onChangeText2}
-          value={text2}
-        />
-      </View>
-      <View style={styles.View}>
-        <Text style={[styles.text, {flex: 2}]}> File # </Text>
-        <Text style={[styles.text, {flex: 0.8}]}> : </Text>
-        <TextInput
-          placeholder="File"
-          style={[styles.input, {flex: 3}]}
-          onChangeText={onChangeText3}
-          value={text3}
-        />
-      </View>
-      <View style={styles.View}>
-        <Text style={[styles.text, {flex: 2}]}>Type </Text>
-        <Text style={[styles.text, {flex: 1}]}> :</Text>
-        <View
-          style={{
-            backgroundColor: colors.white,
-            borderRadius: 8,
-            flex: 3.4,
-            marginRight: 12,
-            marginBottom: 8,
-          }}>
-          <Picker
-            selectedValue={selectedValue}
-            style={{height: Height / 16, width: Width / 2}}
-            onValueChange={(itemValue, itemIndex) =>
-              setSelectedValue(itemValue, itemIndex)
-            }>
-            {categories.map((category) => {
-              return <Picker.Item label={category.n} value={category.n} />;
-            })}
-          </Picker>
+      <View
+        style={{
+          backgroundColor: 'white',
+          margin: 8,
+          borderRadius: 8,
+          elevation: 2,
+        }}>
+        <View style={styles.View}>
+          <Text style={[styles.text, {flex: 2}]}> Client Name </Text>
+          <Text style={[styles.text, {flex: 0.8}]}> : </Text>
+          <TextInput
+            placeholder="Name"
+            style={[styles.input, {flex: 3}]}
+            onChangeText={onChangeText1}
+            value={text1}
+          />
         </View>
-      </View>
-      <View style={[styles.View, {margin: 30}]}>
-        <TouchableOpacity onPress={gotoCases} style={styles.buttons}>
-          <Text style={{color: colors.white}}>Add Case</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.cancelButton}>
-          <Text style={{color: colors.black}}>Cancel</Text>
-        </TouchableOpacity>
+        <View style={styles.View}>
+          <Text style={[styles.text, {flex: 2}]}> Case # </Text>
+          <Text style={[styles.text, {flex: 0.8}]}> : </Text>
+          <TextInput
+            placeholder="Case"
+            style={[styles.input, {flex: 3}]}
+            onChangeText={onChangeText2}
+            value={text2}
+          />
+        </View>
+        <View style={styles.View}>
+          <Text style={[styles.text, {flex: 2}]}> File # </Text>
+          <Text style={[styles.text, {flex: 0.8}]}> : </Text>
+          <TextInput
+            placeholder="File"
+            style={[styles.input, {flex: 3}]}
+            onChangeText={onChangeText3}
+            value={text3}
+          />
+        </View>
+        <View style={styles.View}>
+          <Text style={[styles.text, {flex: 2}]}>Type </Text>
+          <Text style={[styles.text, {flex: 1}]}> :</Text>
+          <View
+            style={{
+              backgroundColor: colors.bg2,
+              borderRadius: 8,
+              flex: 3.4,
+              marginRight: 12,
+              marginBottom: 8,
+            }}>
+            <Picker
+              selectedValue={selectedValue}
+              style={{height: Height / 16, width: Width / 2.2}}
+              onValueChange={(itemValue, itemIndex) =>
+                setSelectedValue(itemValue, itemIndex)
+              }>
+              {categories.map((category) => {
+                return <Picker.Item label={category.n} value={category.n} />;
+              })}
+            </Picker>
+          </View>
+        </View>
+        <View style={[styles.View, {margin: 30}]}>
+          <TouchableOpacity onPress={gotoCases} style={styles.buttons}>
+            <Text style={{color: colors.white}}>Add Case</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={gotoCases} style={styles.cancelButton}>
+            <Text style={{color: colors.black}}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -96,7 +104,7 @@ const styles = StyleSheet.create({
   input: {
     height: Height / 16,
     width: Width / 2,
-    backgroundColor: 'white',
+    backgroundColor: colors.bg2,
     margin: 12,
     borderRadius: 4,
     padding: 10,
@@ -112,7 +120,7 @@ const styles = StyleSheet.create({
   cancelButton: {
     height: Height / 16,
     width: Width / 3,
-    backgroundColor: colors.buttonbg2,
+    backgroundColor: colors.bg2,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,

@@ -71,7 +71,7 @@ export default function Index() {
           </View>
         </TouchableOpacity>
       </View>
-      <View style={{marginTop: 10}}>
+      <View style={{marginTop: 8, backgroundColor: colors.bg2}}>
         <Table borderStyle={{borderColor: 'transparent'}}>
           <Row
             flexArr={[1.5, 2, 2, 2, 2]}
@@ -137,6 +137,6 @@ const styles = StyleSheet.create({
   // btn: { width: 58, height: 18, backgroundColor: '#1E94A3',  borderRadius: 2 },
   btnText: {
     textAlign: 'center',
-    color: '#1E94A3',
+    color: colors.button,
   },
 });

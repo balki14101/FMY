@@ -45,76 +45,87 @@ function CaseDetails() {
   return (
     <ScrollView>
       <View style={{flex: 1}}>
-        <View style={[styles.view, {paddingLeft: 25, paddingRight: 15}]}>
-          <Text style={[styles.text, {flex: 2}]}> Client Name </Text>
-          <Text style={[styles.text, {flex: 0.9}]}> : </Text>
-          <TextInput
-            placeholder="Name"
-            style={[styles.input, {flex: 2.5}]}
-            onChangeText={onChangeText1}
-            value={text1}
-          />
-          <Icon name="edit" />
-        </View>
-        <View style={[styles.view, {paddingHorizontal: 25}]}>
-          <Text style={[styles.text, {flex: 2}]}> Case Start Date </Text>
-          <Text style={[styles.text, {flex: 1.2}]}> :</Text>
-          <DatePicker
-            mode="date"
-            useNativeDriver={false}
-            format="DD-MM-YYYY"
-            customStyles={{
-              dateIcon: {
-                //   display: 'none',
-                position: 'relative',
-                //   left: 0,
-                //   top: 4,
-                //   marginLeft: 0,
-              },
-              dateInput: {
-                //   marginLeft: 25,
-                // margin: 1,
-                // height: Height / 16,
-                borderRadius: 8,
-                // flex:2
-              },
-            }}
-            date={date}
-            onDateChange={setDate}
-          />
-        </View>
-        <View style={[styles.view, {paddingHorizontal: 25}]}>
-          <Text style={[styles.text, {flex: 2}]}> Case # </Text>
-          <Text style={[styles.text, {flex: 0.8}]}>:</Text>
-          <TextInput
-            placeholder="Case"
-            style={[styles.input, {flex: 2.5}]}
-            onChangeText={onChangeText2}
-            value={text2}
-          />
-        </View>
-        <View style={[styles.view, {paddingHorizontal: 25}]}>
-          <Text style={[styles.text, {flex: 2}]}> File # </Text>
-          <Text style={[styles.text, {flex: 0.8}]}>: </Text>
-          <TextInput
-            placeholder="File"
-            style={[styles.input, {flex: 2.5}]}
-            onChangeText={onChangeText3}
-            value={text3}
-          />
+        <View
+          style={{
+            backgroundColor: 'white',
+            margin: 8,
+            borderRadius: 8,
+            elevation: 2,
+            paddingBottom: 8,
+          }}>
+          <View style={[styles.view, {paddingLeft: 15, paddingRight: 5}]}>
+            <Text style={[styles.text, {flex: 2}]}> Client Name </Text>
+            <Text style={[styles.text, {flex: 0.9}]}> : </Text>
+            <TextInput
+              placeholder="Name"
+              style={[styles.input, {flex: 2.5}]}
+              onChangeText={onChangeText1}
+              value={text1}
+            />
+            <Icon name="edit" size={10} />
+          </View>
+          <View style={[styles.view, {paddingHorizontal: 15}]}>
+            <Text style={[styles.text, {flex: 2}]}> Case Start Date </Text>
+            <Text style={[styles.text, {flex: 1}]}> :</Text>
+            <DatePicker
+              mode="date"
+              useNativeDriver={false}
+              format="DD-MM-YYYY"
+              customStyles={{
+                dateIcon: {
+                  //   display: 'none',
+                  position: 'relative',
+                  //   left: 0,
+                  //   top: 4,
+                  //   marginLeft: 0,
+                },
+                dateInput: {
+                  //   marginLeft: 25,
+                  // margin: 1,
+                  // height: Height / 16,
+                  backgroundColor: colors.bg2,
+                  borderRadius: 8,
+                  borderWidth: 0,
+                  // flex:2
+                },
+              }}
+              date={date}
+              onDateChange={setDate}
+            />
+          </View>
+          <View style={[styles.view, {paddingHorizontal: 15}]}>
+            <Text style={[styles.text, {flex: 2}]}> Case # </Text>
+            <Text style={[styles.text, {flex: 0.8}]}>:</Text>
+            <TextInput
+              placeholder="Case"
+              style={[styles.input, {flex: 2.5}]}
+              onChangeText={onChangeText2}
+              value={text2}
+            />
+          </View>
+          <View style={[styles.view, {paddingHorizontal: 15}]}>
+            <Text style={[styles.text, {flex: 2}]}> File # </Text>
+            <Text style={[styles.text, {flex: 0.8}]}>: </Text>
+            <TextInput
+              placeholder="File"
+              style={[styles.input, {flex: 2.5}]}
+              onChangeText={onChangeText3}
+              value={text3}
+            />
+          </View>
         </View>
         <View
           style={{
             alignItems: 'center',
             paddingVertical: 10,
             marginTop: 10,
-            backgroundColor: '#FFF1C1',
+            backgroundColor: colors.bg2,
           }}>
           <Text style={[styles.text, {fontSize: 16, color: colors.button}]}>
             Events
           </Text>
         </View>
-        <View>
+        <View style={{backgroundColor: colors.bg2}}>
           <Table borderStyle={{borderColor: 'transparent'}}>
             <Row
               data={tableHead}
@@ -142,12 +153,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 8,
   },
   input: {
     height: Height / 16,
     // width: Width / 4,
-    backgroundColor: 'white',
+    backgroundColor: colors.bg2,
     marginTop: 12,
     borderRadius: 4,
     padding: 10,

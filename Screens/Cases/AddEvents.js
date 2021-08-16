@@ -74,98 +74,107 @@ export function AddEvent() {
   return (
     <ScrollView>
       <View style={{flex: 1}}>
-        <View style={styles.view}>
-          <Text style={styles.text}> Client Name </Text>
-          <Text style={styles.textColon}> : </Text>
-          <TextInput
-            placeholder="Name"
-            style={styles.input}
-            onChangeText={onChangeText1}
-            value={text1}
-          />
-        </View>
-        {/* <nameView /> */}
-        <View style={styles.view}>
-          <Text style={styles.text}> Case # </Text>
-          <Text style={styles.textColon}> : </Text>
-          <TextInput
-            placeholder="Case"
-            style={styles.input}
-            onChangeText={onChangeText2}
-            value={text2}
-          />
-        </View>
-        <View style={styles.view}>
-          <Text style={styles.text}> File # </Text>
-          <Text style={styles.textColon}> : </Text>
-          <TextInput
-            placeholder="File"
-            style={styles.input}
-            onChangeText={onChangeText3}
-            value={text3}
-          />
-        </View>
-        <View style={[styles.view, {marginBottom: 10}]}>
-          <Text style={styles.text}> Select Date </Text>
-          <Text style={[styles.text, {flex: 1.5}]}> : </Text>
-          <DatePicker
-            mode="date"
-            useNativeDriver={false}
-            format="DD-MM-YYYY"
-            customStyles={{
-              dateIcon: {
-                // display: 'none',
-                position: 'relative',
-                left: 0,
-                // top: 4,
-                marginLeft: 0,
-              },
-              dateInput: {
-                // marginLeft: 36,
-                borderRadius: 8,
-              },
-            }}
-            date={date}
-            onDateChange={setDate}
-          />
-        </View>
-        <View style={styles.view}>
-          <Text style={styles.text}>Select Events </Text>
-          <Text style={styles.textColon}>:</Text>
-          <View
-            style={{
-              backgroundColor: colors.white,
-              borderRadius: 8,
-              flex: 2.8,
-              marginRight: 12,
-            }}>
-            <Picker
-              selectedValue={selectedValue}
-              style={{height: Height / 18, width: Width / 2.2}}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedValue(itemValue)
-              }>
-              {Events.map((Events) => {
-                return <Picker.Item label={Events.n} value={Events.n} />;
-              })}
-            </Picker>
+        <View
+          style={{
+            backgroundColor: 'white',
+            margin: 8,
+            borderRadius: 8,
+            elevation: 2,
+          }}>
+          <View style={styles.view}>
+            <Text style={styles.text}> Client Name </Text>
+            <Text style={styles.textColon}> : </Text>
+            <TextInput
+              placeholder="Name"
+              style={styles.input}
+              onChangeText={onChangeText1}
+              value={text1}
+            />
           </View>
-        </View>
+          {/* <nameView /> */}
+          <View style={styles.view}>
+            <Text style={styles.text}> Case # </Text>
+            <Text style={styles.textColon}> : </Text>
+            <TextInput
+              placeholder="Case"
+              style={styles.input}
+              onChangeText={onChangeText2}
+              value={text2}
+            />
+          </View>
+          <View style={styles.view}>
+            <Text style={styles.text}> File # </Text>
+            <Text style={styles.textColon}> : </Text>
+            <TextInput
+              placeholder="File"
+              style={styles.input}
+              onChangeText={onChangeText3}
+              value={text3}
+            />
+          </View>
+          <View style={[styles.view, {marginBottom: 10}]}>
+            <Text style={styles.text}> Select Date </Text>
+            <Text style={[styles.text, {flex: 1.5}]}> : </Text>
+            <DatePicker
+              mode="date"
+              useNativeDriver={false}
+              format="DD-MM-YYYY"
+              customStyles={{
+                dateIcon: {
+                  // display: 'none',
+                  position: 'relative',
+                  left: 0,
+                  // top: 4,
+                  marginLeft: 0,
+                },
+                dateInput: {
+                  // marginLeft: 36,
+                  borderRadius: 8,
+                  borderWidth: 0,
+                  backgroundColor: colors.bg2,
+                },
+              }}
+              date={date}
+              onDateChange={setDate}
+            />
+          </View>
+          <View style={styles.view}>
+            <Text style={styles.text}>Select Events </Text>
+            <Text style={styles.textColon}>:</Text>
+            <View
+              style={{
+                backgroundColor: colors.bg2,
+                borderRadius: 8,
+                flex: 2.8,
+                marginRight: 8,
+              }}>
+              <Picker
+                selectedValue={selectedValue}
+                style={{height: Height / 18, width: Width / 2.2}}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }>
+                {Events.map((Events) => {
+                  return <Picker.Item label={Events.n} value={Events.n} />;
+                })}
+              </Picker>
+            </View>
+          </View>
 
-        <View style={styles.view}>
-          <Text style={styles.text}> If others* </Text>
-          <Text style={styles.textColon}> : </Text>
-          <TextInput
-            placeholder="others"
-            style={styles.input}
-            onChangeText={onChangeothers}
-            value={others}
-          />
-        </View>
+          <View style={styles.view}>
+            <Text style={styles.text}> If others* </Text>
+            <Text style={styles.textColon}> : </Text>
+            <TextInput
+              placeholder="others"
+              style={styles.input}
+              onChangeText={onChangeothers}
+              value={others}
+            />
+          </View>
 
-        <View>
-          <UploadDoc />
-          {/* <Text style={styles.text}> Upload Documents : </Text>
+          <View>
+            <UploadDoc />
+            {/* <Text style={styles.text}> Upload Documents : </Text>
           <View style={styles.view}>
           <Image style={{ height: 100, width: 100 }} source={{ uri: image }} />
                <TouchableOpacity  onPress={chooseImageFromGallery} style={styles.buttons}  >
@@ -176,17 +185,18 @@ export function AddEvent() {
                 <Text style={styles.btnText}>From Camera</Text>
               </TouchableOpacity>       
           </View> */}
-        </View>
+          </View>
 
-        <View style={[styles.view, {paddingBottom: 20}]}>
-          <TouchableOpacity
-            style={styles.cancelButton}
-            onPress={gotoCaseDetails}>
-            <Text style={{color: colors.black}}>Cancel</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttons} onPress={gotoCaseDetails}>
-            <Text style={{color: colors.white}}>Save</Text>
-          </TouchableOpacity>
+          <View style={[styles.view, {paddingBottom: 20}]}>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={gotoCaseDetails}>
+              <Text style={{color: colors.black}}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttons} onPress={gotoCaseDetails}>
+              <Text style={{color: colors.white}}>Save</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -203,7 +213,7 @@ const styles = StyleSheet.create({
   input: {
     height: Height / 16,
     width: Width / 2,
-    backgroundColor: 'white',
+    backgroundColor: colors.bg2,
     margin: 12,
     borderRadius: 4,
     padding: 10,
@@ -220,7 +230,7 @@ const styles = StyleSheet.create({
   cancelButton: {
     height: Height / 16,
     width: Width / 3,
-    backgroundColor: colors.buttonbg2,
+    backgroundColor: colors.bg2,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
