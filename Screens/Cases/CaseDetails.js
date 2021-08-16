@@ -13,9 +13,11 @@ import {
   Cell,
 } from 'react-native-table-component';
 import Icon from 'react-native-vector-icons/Feather';
+import Doc from 'react-native-vector-icons/Ionicons';
 // import ImagePicker from 'react-native-image-crop-picker';
 //constants
 import {Height, Width} from '../../Helper/Dimensions';
+import text from '../../Helper/Styles';
 import colors from '../../Helper/Colors';
 
 function CaseDetails() {
@@ -30,12 +32,10 @@ function CaseDetails() {
 
   const [selectedValue, setSelectedValue] = useState('');
 
-  const tableHead = ['Event', 'Date', 'Document'];
-  const tableData = [
-    ['Vakalat', '1-Oct-21', 'Doc.pdf'],
-    ['Hearing', '10-Oct-21', 'Doc.pdf'],
-    ['Application', '21-Oct-21', 'Doc.pdf'],
-    // ['Order', '1-Nov-21', 'Doc.pdf']
+  const EventsCard = [
+    {event: 'Vakalat', date: '1-Oct-21', doc: 'Doc.pdf'},
+    {event: 'Hearing', date: '10-Oct-21', doc: 'Doc.pdf'},
+    {event: 'Application', date: '21-Oct-21', doc: 'Doc.pdf'},
   ];
 
   const navigation = useNavigation();
@@ -125,16 +125,29 @@ function CaseDetails() {
             Events
           </Text>
         </View>
-        <View style={{backgroundColor: colors.bg2}}>
-          <Table borderStyle={{borderColor: 'transparent'}}>
-            <Row
-              data={tableHead}
-              style={styles.head}
-              textStyle={[styles.text1, {fontWeight: 'bold'}]}
-            />
-            <Rows data={tableData} textStyle={styles.text1} />
-          </Table>
-        </View>
+        {EventsCard.map((card) => {
+          return (
+            <View style={styles.cardView}>
+              <View style={styles.cardContentView}>
+                <Text style={text.textMedium}>Event</Text>
+                <Text style={text.textMedium}> : </Text>
+                <Text style={text.textMedium}>{card.event}</Text>
+              </View>
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <View style={styles.cardContentView}>
+                  <Text style={text.textMedium}>Date</Text>
+                  <Text style={text.textMedium}> : </Text>
+                  <Text style={text.textMedium}>{card.date}</Text>
+                </View>
+                <View style={styles.cardContentView}>
+                  <Doc name="document-attach-outline" size={12} />
+                  <Text style={text.textRegularVariant}>{card.doc}</Text>
+                </View>
+              </View>
+            </View>
+          );
+        })}
         <View style={styles.view}>
           <TouchableOpacity style={styles.buttons} onPress={gotoAddEvents}>
             <Text style={{color: colors.white}}>Add Events</Text>
@@ -162,6 +175,22 @@ const styles = StyleSheet.create({
     marginTop: 12,
     borderRadius: 4,
     padding: 10,
+  },
+  cardView: {
+    // flexDirection: 'row',
+    // justifyContent: 'space-evenly',
+    // alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 8,
+    borderRadius: 8,
+    elevation: 2,
+    padding: 16,
+    // height: Height / 8,
+  },
+  cardContentView: {
+    flexDirection: 'row',
+    paddingVertical: 4,
+    alignItems: 'center',
   },
   buttons: {
     height: Height / 16,
