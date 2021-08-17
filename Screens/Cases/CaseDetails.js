@@ -114,7 +114,7 @@ function CaseDetails() {
             />
           </View>
         </View>
-        <View
+        {/* <View
           style={{
             alignItems: 'center',
             paddingVertical: 10,
@@ -147,7 +147,7 @@ function CaseDetails() {
               </View>
             </View>
           );
-        })}
+        })} */}
         <View style={styles.view}>
           <TouchableOpacity style={styles.buttons} onPress={gotoAddEvents}>
             <Text style={{color: colors.white}}>Add Events</Text>
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    marginTop: 8,
+    marginVertical: 8,
   },
   input: {
     height: Height / 16,

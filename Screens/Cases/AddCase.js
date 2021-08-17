@@ -7,6 +7,7 @@ import {Picker} from '@react-native-picker/picker';
 import {Height, Width} from '../../Helper/Dimensions';
 import colors from '../../Helper/Colors';
 import categories from '../../Helper/Constants';
+import text from '../../Helper/Styles';
 
 export function AddCase() {
   const [text1, onChangeText1] = React.useState('');
@@ -29,49 +30,52 @@ export function AddCase() {
           elevation: 2,
         }}>
         <View style={styles.View}>
-          <Text style={[styles.text, {flex: 2}]}> Client Name </Text>
-          <Text style={[styles.text, {flex: 0.8}]}> : </Text>
+          <Text style={[text.textMedium, {width: Width / 4}]}>Client Name</Text>
+          <Text style={[text.textMedium]}> : </Text>
           <TextInput
             placeholder="Name"
-            style={[styles.input, {flex: 3}]}
+            style={[styles.input]}
             onChangeText={onChangeText1}
             value={text1}
           />
         </View>
         <View style={styles.View}>
-          <Text style={[styles.text, {flex: 2}]}> Case # </Text>
-          <Text style={[styles.text, {flex: 0.8}]}> : </Text>
+          <Text style={[text.textMedium, {width: Width / 4}]}>Case #</Text>
+          <Text style={[text.textMedium]}> : </Text>
           <TextInput
             placeholder="Case"
-            style={[styles.input, {flex: 3}]}
+            style={[styles.input]}
             onChangeText={onChangeText2}
             value={text2}
           />
         </View>
         <View style={styles.View}>
-          <Text style={[styles.text, {flex: 2}]}> File # </Text>
-          <Text style={[styles.text, {flex: 0.8}]}> : </Text>
+          <Text style={[text.textMedium, {width: Width / 4}]}>File #</Text>
+          <Text style={[text.textMedium]}> : </Text>
           <TextInput
             placeholder="File"
-            style={[styles.input, {flex: 3}]}
+            style={[styles.input]}
             onChangeText={onChangeText3}
             value={text3}
           />
         </View>
         <View style={styles.View}>
-          <Text style={[styles.text, {flex: 2}]}>Type </Text>
-          <Text style={[styles.text, {flex: 1}]}> :</Text>
+          <Text style={[text.textMedium, {width: Width / 4}]}>Type </Text>
+          <Text style={text.textMedium}> : </Text>
           <View
             style={{
               backgroundColor: colors.bg2,
-              borderRadius: 8,
-              flex: 3.4,
-              marginRight: 12,
-              marginBottom: 8,
+              width: Width / 2,
+              height: Height / 16,
+              justifyContent: 'center',
+              margin: 12,
+              borderRadius: 4,
             }}>
             <Picker
               selectedValue={selectedValue}
-              style={{height: Height / 16, width: Width / 2.2}}
+              style={{
+                color: '#000000',
+              }}
               onValueChange={(itemValue, itemIndex) =>
                 setSelectedValue(itemValue, itemIndex)
               }>
@@ -100,6 +104,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     paddingHorizontal: 10,
+    height: Height / 10,
   },
   input: {
     height: Height / 16,

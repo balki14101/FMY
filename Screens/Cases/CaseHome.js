@@ -134,7 +134,7 @@ export default function Index() {
           <View
             style={[
               styles.view,
-              {backgroundColor: colors.button, borderRadius: 50},
+              {backgroundColor: colors.button, borderRadius: 16},
             ]}>
             <AddIcon name="add" size={32} color="#f6f6f6" />
             <Text style={text.textMedium}>Add Case</Text>
