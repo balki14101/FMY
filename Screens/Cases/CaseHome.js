@@ -136,8 +136,15 @@ export default function Index() {
               styles.view,
               {backgroundColor: colors.button, borderRadius: 16},
             ]}>
-            <AddIcon name="add" size={32} color="#f6f6f6" />
-            <Text style={text.textMedium}>Add Case</Text>
+            <AddIcon name="add" size={24} color="#f6f6f6" />
+            <Text
+              style={{
+                fontFamily: 'roboto_medium',
+                fontSize: 16,
+                color: colors.bg,
+              }}>
+              Add Case
+            </Text>
           </View>
         </TouchableOpacity>
       </View>
