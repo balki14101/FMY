@@ -11,10 +11,13 @@ import {useNavigation} from '@react-navigation/native';
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-datepicker';
 import ImagePicker from 'react-native-image-crop-picker';
+import Icon from 'react-native-vector-icons/Feather';
+
 // import ImagePicker from 'react-native-image-crop-picker';
 //constants
 import {Height, Width} from '../../Helper/Dimensions';
 import colors from '../../Helper/Colors';
+import text from '../../Helper/Styles';
 import {Events} from '../../Helper/Constants';
 import UploadDoc from './UploadDoc';
 
@@ -59,18 +62,6 @@ export function AddEvent() {
     navigation.navigate('AddEvents');
   };
 
-  const nameView = () => {
-    // <View style={styles.view}>
-    //             <Text style={styles.text}> Client Name </Text>
-    //             <Text style={styles.textColon}> : </Text>
-    //             <TextInput
-    //                 placeholder="Name"
-    //                 style={styles.input}
-    //                 onChangeText={onChangeText1}
-    //                 value={text1}
-    //             />
-    //         </View>
-  };
   return (
     <ScrollView>
       <View style={{flex: 1}}>
@@ -82,19 +73,34 @@ export function AddEvent() {
             elevation: 2,
           }}>
           <View style={styles.view}>
-            <Text style={styles.text}> Client Name </Text>
-            <Text style={styles.textColon}> : </Text>
-            <TextInput
-              placeholder="Name"
-              style={styles.input}
-              onChangeText={onChangeText1}
-              value={text1}
-            />
+            <Text style={[text.textMedium, {width: Width / 3}]}>
+              {'Client Name'}
+            </Text>
+            <Text style={text.textMedium}> {':'} </Text>
+            <View
+              style={[
+                styles.input,
+                {
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                },
+              ]}>
+              <TextInput
+                placeholder="Name"
+                style={{color: '#000000', height: Height / 16}}
+                onChangeText={onChangeText1}
+                value={text1}
+              />
+              <Icon name="edit" size={16} color={colors.grey} />
+            </View>
           </View>
-          {/* <nameView /> */}
+
           <View style={styles.view}>
-            <Text style={styles.text}> Case # </Text>
-            <Text style={styles.textColon}> : </Text>
+            <Text style={[text.textMedium, {width: Width / 3}]}>
+              {'Case #'}
+            </Text>
+            <Text style={[text.textMedium]}> {':'} </Text>
             <TextInput
               placeholder="Case"
               style={styles.input}
@@ -103,8 +109,10 @@ export function AddEvent() {
             />
           </View>
           <View style={styles.view}>
-            <Text style={styles.text}> File # </Text>
-            <Text style={styles.textColon}> : </Text>
+            <Text style={[text.textMedium, {width: Width / 3}]}>
+              {'File #'}
+            </Text>
+            <Text style={[text.textMedium]}> {':'} </Text>
             <TextInput
               placeholder="File"
               style={styles.input}
@@ -112,7 +120,42 @@ export function AddEvent() {
               value={text3}
             />
           </View>
-          <View style={[styles.view, {marginBottom: 10}]}>
+          <View style={styles.view}>
+            <Text style={[text.textMedium, {width: Width / 3}]}>
+              {'Case Start Date'}
+            </Text>
+            <Text style={text.textMedium}> {':'} </Text>
+            <View
+              style={{
+                backgroundColor: colors.bg2,
+                width: Width / 2,
+                height: Height / 16,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 4,
+              }}>
+              <DatePicker
+                mode="date"
+                useNativeDriver={false}
+                format="DD-MM-YYYY"
+                customStyles={{
+                  dateIcon: {
+                    // display: 'none',
+                    position: 'relative',
+                    // left: 8,
+                    // top: 4,
+                    //   marginLeft: 0,
+                  },
+                  dateInput: {
+                    borderWidth: 0,
+                  },
+                }}
+                date={date}
+                onDateChange={setDate}
+              />
+            </View>
+          </View>
+          {/* <View style={[styles.view, {marginBottom: 10}]}>
             <Text style={styles.text}> Select Date </Text>
             <Text style={[styles.text, {flex: 1.5}]}> : </Text>
             <DatePicker
@@ -137,22 +180,25 @@ export function AddEvent() {
               date={date}
               onDateChange={setDate}
             />
-          </View>
+          </View> */}
           <View style={styles.view}>
-            <Text style={styles.text}>Select Events </Text>
-            <Text style={styles.textColon}>:</Text>
+            <Text style={[text.textMedium, {width: Width / 3}]}>Type </Text>
+            <Text style={text.textMedium}> : </Text>
             <View
               style={{
                 backgroundColor: colors.bg2,
-                borderRadius: 8,
-                flex: 2.8,
-                marginRight: 8,
+                width: Width / 2,
+                height: Height / 16,
+                justifyContent: 'center',
+                borderRadius: 4,
               }}>
               <Picker
                 selectedValue={selectedValue}
-                style={{height: Height / 18, width: Width / 2.2}}
+                style={{
+                  color: '#000000',
+                }}
                 onValueChange={(itemValue, itemIndex) =>
-                  setSelectedValue(itemValue)
+                  setSelectedValue(itemValue, itemIndex)
                 }>
                 {Events.map((Events) => {
                   return <Picker.Item label={Events.n} value={Events.n} />;
@@ -160,15 +206,16 @@ export function AddEvent() {
               </Picker>
             </View>
           </View>
-
           <View style={styles.view}>
-            <Text style={styles.text}> If others* </Text>
-            <Text style={styles.textColon}> : </Text>
+            <Text style={[text.textMedium, {width: Width / 3}]}>
+              {'If others*'}
+            </Text>
+            <Text style={[text.textMedium]}> {':'} </Text>
             <TextInput
               placeholder="others"
               style={styles.input}
               onChangeText={onChangeothers}
-              value={others}
+              value={text2}
             />
           </View>
 
@@ -205,19 +252,18 @@ export function AddEvent() {
 const styles = StyleSheet.create({
   view: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 10,
-    paddingHorizontal: 15,
+    marginTop: 16,
+    paddingHorizontal: 10,
   },
   input: {
     height: Height / 16,
     width: Width / 2,
     backgroundColor: colors.bg2,
-    margin: 12,
+    // margin: 12,
     borderRadius: 4,
     padding: 10,
-    flex: 2.5,
   },
   buttons: {
     height: Height / 16,
