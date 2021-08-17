@@ -138,7 +138,7 @@ function CaseDetails() {
             />
           </View>
         </View>
-        {/* <View
+        <View
           style={{
             alignItems: 'center',
             paddingVertical: 10,
@@ -171,7 +171,7 @@ function CaseDetails() {
               </View>
             </View>
           );
-        })} */}
+        })}
         <View style={styles.view}>
           <TouchableOpacity style={styles.buttons} onPress={gotoAddEvents}>
             <Text style={{color: colors.white}}>Add Events</Text>
