@@ -24,9 +24,9 @@ export default function ImagesAndDocuments({navigation}) {
   const [singleFile, setSingleFile] = useState([]);
   const [multipleFile, setMultipleFile] = useState([]);
 
-  const [profile, setProfile] = useState([]);
-  const [barCouncilCertificate, setBarCouncilCertificate] = useState([]);
-  const [aadharCard, setAadharCard] = useState([]);
+  const [profile, setProfile] = useState('');
+  const [barCouncilCertificate, setBarCouncilCertificate] = useState('');
+  const [aadharCard, setAadharCard] = useState('');
 
   const [isImageSelected, setIsImageSelected] = useState(false);
   const [isBarSelected, setIsBarSelected] = useState(false);
@@ -103,7 +103,9 @@ export default function ImagesAndDocuments({navigation}) {
     ImagePicker.openPicker({
       multiple: false,
     }).then((images) => {
-      setProfile(images);
+      setProfile({
+        uri: images.path,
+      });
       setIsImageSelected(true);
       setShowPickerForProfilePicture(false);
     });
@@ -114,12 +116,28 @@ export default function ImagesAndDocuments({navigation}) {
       width: 300,
       height: 400,
       cropping: true,
-    }).then((images) => {
-      setProfile(images);
+    }).then((image) => {
+      console.log('profile picture from camera', image);
+      setProfile({
+        uri: image.path,
+        width: image.width,
+        height: image.height,
+        mime: image.mime,
+      });
+      console.log('path:', profile);
       setIsImageSelected(true);
       setShowPickerForProfilePicture(false);
     });
   };
+
+  function renderImage(image) {
+    return (
+      <Image
+        style={{width: 150, height: 150, resizeMode: 'contain'}}
+        source={image}
+      />
+    );
+  }
 
   // Bar council
 
@@ -127,7 +145,7 @@ export default function ImagesAndDocuments({navigation}) {
     ImagePicker.openPicker({
       multiple: false,
     }).then((images) => {
-      setBarCouncilCertificate(images);
+      setBarCouncilCertificate({uri: images.path});
       setIsBarSelected(true);
       setShowPickerForBar(false);
     });
@@ -139,7 +157,7 @@ export default function ImagesAndDocuments({navigation}) {
       height: 400,
       cropping: true,
     }).then((images) => {
-      setBarCouncilCertificate(images);
+      setBarCouncilCertificate({uri: images.path});
       setIsBarSelected(true);
       setShowPickerForBar(false);
     });
@@ -150,20 +168,20 @@ export default function ImagesAndDocuments({navigation}) {
   const chooseImageForAadharCard = async () => {
     ImagePicker.openPicker({
       multiple: false,
-    }).then((images) => {
-      setAadharCard(images);
+    }).then((image) => {
+      setAadharCard({uri: image.path});
       setIsAadharSelected(true);
       setShowPickerForAadhar(false);
     });
   };
 
-  const launchCameraForAadharCard = async () => {
+  const launchCameraForAadharCard = () => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
       cropping: true,
-    }).then((images) => {
-      setAadharCard(images);
+    }).then((image) => {
+      setAadharCard({uri: image.path});
       setIsAadharSelected(true);
       setShowPickerForAadhar(false);
     });
@@ -433,7 +451,7 @@ export default function ImagesAndDocuments({navigation}) {
         <Text style={styles.pageHeader}>Registration Details (3/3)</Text>
       </View>
 
-      {showPickerForDocuments && (
+      {/* {showPickerForDocuments && (
         <View style={styles.btnParentSection}>
           <TouchableOpacity
             onPress={chooseImageForDocuments}
@@ -463,8 +481,9 @@ export default function ImagesAndDocuments({navigation}) {
             <Text style={styles.btnText}>From Camera</Text>
           </TouchableOpacity>
         </View>
-      )}
+      )} */}
 
+      {/* Modal For Profile Pictures */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -488,6 +507,8 @@ export default function ImagesAndDocuments({navigation}) {
         </View>
       </Modal>
 
+      {/* Modal For BarCouncilCertificate*/}
+
       <Modal
         animationType="fade"
         transparent={true}
@@ -509,6 +530,8 @@ export default function ImagesAndDocuments({navigation}) {
           </TouchableOpacity>
         </View>
       </Modal>
+
+      {/* Modal For Aadhar Card*/}
 
       <Modal
         animationType="fade"
@@ -532,7 +555,7 @@ export default function ImagesAndDocuments({navigation}) {
         </View>
       </Modal>
 
-      {showPickerForProfilePicture && (
+      {/* {showPickerForProfilePicture && (
         <View style={styles.btnParentSection}>
           <TouchableOpacity
             onPress={chooseImageForProfilePicture}
@@ -546,7 +569,7 @@ export default function ImagesAndDocuments({navigation}) {
             <Text style={styles.btnText}>From Camera</Text>
           </TouchableOpacity>
         </View>
-      )}
+      )} */}
 
       <View style={{alignItems: 'center', paddingStart: 20, paddingEnd: 20}}>
         <View>
@@ -568,7 +591,7 @@ export default function ImagesAndDocuments({navigation}) {
               onPress={selectProfileImage}>
               {isImageSelected ? (
                 <Image
-                  source={{uri: profile[0].path}}
+                  source={{uri: profile.uri}}
                   style={styles.imageContainer}
                 />
               ) : (
@@ -590,7 +613,7 @@ export default function ImagesAndDocuments({navigation}) {
             <TouchableOpacity style={styles.imageContainer} onPress={selectBar}>
               {isBarSelected ? (
                 <Image
-                  source={{uri: barCouncilCertificate[0].path}}
+                  source={{uri: barCouncilCertificate.uri}}
                   style={styles.imageContainer}
                 />
               ) : (
@@ -615,7 +638,7 @@ export default function ImagesAndDocuments({navigation}) {
               onPress={selectAadhar}>
               {isAadharSelected ? (
                 <Image
-                  source={{uri: aadharCard[0].path}}
+                  source={{uri: aadharCard.uri}}
                   style={styles.imageContainer}
                 />
               ) : (
