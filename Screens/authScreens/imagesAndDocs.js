@@ -51,60 +51,61 @@ export default function ImagesAndDocuments({navigation}) {
   const [showPickerForAadhar, setShowPickerForAadhar] = useState(false);
   const [selectedValue, setSelectedValue] = useState('java');
 
-  const selectOneFile = async () => {
-    setShowPickerForDocuments(true);
-  };
+  // const selectOneFile = async () => {
+  //   setShowPickerForDocuments(true);
+  // };
 
-  const chooseImageForDocuments = async () => {
-    ImagePicker.openPicker({
-      multiple: true,
-    }).then((images) => {
-      setSingleFile(singleFile.concat(images));
-      setShowPickerForDocuments(false);
-      setExpandDoc(true);
-    });
-  };
+  // const chooseImageForDocuments = async () => {
+  //   ImagePicker.openPicker({
+  //     multiple: true,
+  //   }).then((images) => {
+  //     setSingleFile(singleFile.concat(images));
+  //     setShowPickerForDocuments(false);
+  //     setExpandDoc(true);
+  //   });
+  // };
 
-  const launchCameraForDocuments = async () => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then((image) => {
-      setSingleFile(singleFile.concat(image));
-      setShowPickerForDocuments(false);
-      setExpandDoc(true);
-    });
-  };
+  // const launchCameraForDocuments = async () => {
+  //   ImagePicker.openCamera({
+  //     width: 300,
+  //     height: 400,
+  //     cropping: true,
+  //   }).then((image) => {
+  //     setSingleFile(singleFile.concat(image));
+  //     setShowPickerForDocuments(false);
+  //     setExpandDoc(true);
+  //   });
+  // };
 
-  const chooseImageForPictures = async () => {
-    ImagePicker.openPicker({
-      multiple: true,
-    }).then((images) => {
-      setMultipleFile(multipleFile.concat(images));
-      setShowPickerForPictures(false);
-      setExpandOI(true);
-    });
-  };
+  // const chooseImageForPictures = async () => {
+  //   ImagePicker.openPicker({
+  //     multiple: true,
+  //   }).then((images) => {
+  //     setMultipleFile(multipleFile.concat(images));
+  //     setShowPickerForPictures(false);
+  //     setExpandOI(true);
+  //   });
+  // };
 
-  const launchCameraForPictures = async () => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then((image) => {
-      setMultipleFile(multipleFile.concat(image));
-      setShowPickerForPictures(false);
-      setExpandOI(true);
-    });
-  };
+  // const launchCameraForPictures = async () => {
+  //   ImagePicker.openCamera({
+  //     width: 300,
+  //     height: 400,
+  //     cropping: true,
+  //   }).then((image) => {
+  //     setMultipleFile(multipleFile.concat(image));
+  //     setShowPickerForPictures(false);
+  //     setExpandOI(true);
+  //   });
+  // };
 
   const chooseImageForProfilePicture = async () => {
     ImagePicker.openPicker({
       multiple: false,
-    }).then((images) => {
+    }).then((image) => {
       setProfile({
-        uri: images.path,
+        uri: image.path,
+        mime: image.mime,
       });
       setIsImageSelected(true);
       setShowPickerForProfilePicture(false);
@@ -130,22 +131,16 @@ export default function ImagesAndDocuments({navigation}) {
     });
   };
 
-  function renderImage(image) {
-    return (
-      <Image
-        style={{width: 150, height: 150, resizeMode: 'contain'}}
-        source={image}
-      />
-    );
-  }
-
   // Bar council
 
   const chooseImageForBarCouncilCertificate = async () => {
     ImagePicker.openPicker({
       multiple: false,
-    }).then((images) => {
-      setBarCouncilCertificate({uri: images.path});
+    }).then((image) => {
+      setBarCouncilCertificate({
+        uri: image.path,
+        mime: image.mime,
+      });
       setIsBarSelected(true);
       setShowPickerForBar(false);
     });
@@ -156,8 +151,11 @@ export default function ImagesAndDocuments({navigation}) {
       width: 300,
       height: 400,
       cropping: true,
-    }).then((images) => {
-      setBarCouncilCertificate({uri: images.path});
+    }).then((image) => {
+      setBarCouncilCertificate({
+        uri: image.path,
+        mime: image.mime,
+      });
       setIsBarSelected(true);
       setShowPickerForBar(false);
     });
@@ -166,22 +164,32 @@ export default function ImagesAndDocuments({navigation}) {
   // Aadhar
 
   const chooseImageForAadharCard = async () => {
-    ImagePicker.openPicker({
-      multiple: false,
-    }).then((image) => {
-      setAadharCard({uri: image.path});
-      setIsAadharSelected(true);
-      setShowPickerForAadhar(false);
-    });
+    try {
+      ImagePicker.openPicker({
+        multiple: false,
+      }).then((image) => {
+        setAadharCard({
+          uri: image.path,
+          mime: image.mime,
+        });
+        setIsAadharSelected(true);
+        setShowPickerForAadhar(false);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const launchCameraForAadharCard = () => {
+  const launchCameraForAadharCard = async () => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
       cropping: true,
     }).then((image) => {
-      setAadharCard({uri: image.path});
+      setAadharCard({
+        uri: image.path,
+        mime: image.mime,
+      });
       setIsAadharSelected(true);
       setShowPickerForAadhar(false);
     });
@@ -266,15 +274,15 @@ export default function ImagesAndDocuments({navigation}) {
 
       var theProfile = {};
 
-      theProfile = profile[0];
+      theProfile = profile;
       theProfile.type = theProfile.mime;
-      theProfile.uri = theProfile.path;
+      theProfile.uri = theProfile.uri;
 
-      if (profile[0].mime == 'image/jpeg') {
+      if (profile.mime == 'image/jpeg') {
         theProfile.name = Math.random().toString(36).substring(7) + '.jpg';
       }
 
-      if (profile[0].mime == 'image/png') {
+      if (profile.mime == 'image/png') {
         theProfile.name = Math.random().toString(36).substring(7) + '.png';
       }
 
@@ -285,15 +293,15 @@ export default function ImagesAndDocuments({navigation}) {
       // Bar council
       var theAadhar = {};
 
-      theAadhar = aadharCard[0];
+      theAadhar = aadharCard;
       theAadhar.type = theAadhar.mime;
-      theAadhar.uri = theAadhar.path;
+      theAadhar.uri = theAadhar.uri;
 
-      if (aadharCard[0].mime == 'image/jpeg') {
+      if (aadharCard.mime == 'image/jpeg') {
         theAadhar.name = Math.random().toString(36).substring(7) + '.jpg';
       }
 
-      if (aadharCard[0].mime == 'image/png') {
+      if (aadharCard.mime == 'image/png') {
         theAadhar.name = Math.random().toString(36).substring(7) + '.png';
       }
 
@@ -304,15 +312,15 @@ export default function ImagesAndDocuments({navigation}) {
       // Aadhar
       var theBar = {};
 
-      theBar = barCouncilCertificate[0];
+      theBar = barCouncilCertificate;
       theBar.type = theBar.mime;
-      theBar.uri = theBar.path;
+      theBar.uri = theBar.uri;
 
-      if (barCouncilCertificate[0].mime == 'image/jpeg') {
+      if (barCouncilCertificate.mime == 'image/jpeg') {
         theBar.name = Math.random().toString(36).substring(7) + '.jpg';
       }
 
-      if (barCouncilCertificate[0].mime == 'image/png') {
+      if (barCouncilCertificate.mime == 'image/png') {
         theBar.name = Math.random().toString(36).substring(7) + '.png';
       }
 

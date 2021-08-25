@@ -10,6 +10,7 @@ import ProfileOptions from '../../routes/profileOptions';
 import HomeReview from '../appScreens/reviewsTabScreens/reviewHome';
 import SettingsHome from '../appScreens/settingsTabScreens/settingHometab';
 import ProfileHome from '../appScreens/profileTabScreens/home';
+import EditProfile from '../appScreens/profileTabScreens/editProfileTab';
 import SubcriptionsHome from '../appScreens/subcriptionsTabScreens/homeTopTabSub';
 
 const accountStack = createStackNavigator();
@@ -48,6 +49,11 @@ const Account = () => {
       <accountStack.Screen
         name="Profile"
         component={ProfileHome}
+        options={headerOptions}
+      />
+      <accountStack.Screen
+        name="EditProfile"
+        component={EditProfile}
         options={headerOptions}
       />
       <accountStack.Screen

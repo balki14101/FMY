@@ -298,7 +298,7 @@ export default function ImagesAndDocuments({navigation}) {
       },
     };
 
-    setLoading(true);
+    // setLoading(true);
     setLoadingMessage('Uploading your files...	');
 
     fetch(

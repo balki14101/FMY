@@ -74,6 +74,13 @@ export default function ProfileOptions() {
     navigation.navigate('account', {screen: 'Subscription'});
   };
 
+  const showModal = () => {
+    setShowOptions(true);
+    setTimeout(() => {
+      setShowOptions(false);
+    }, 3000);
+  };
+
   return (
     <View style={{flexDirection: 'row', right: 10}}>
       <HelpLogo
@@ -89,7 +96,7 @@ export default function ProfileOptions() {
           style={{marginLeft: 10}}
           color="#28899B"
           size={30}
-          onPress={() => setShowOptions(true)}
+          onPress={() => showModal(true)}
         />
       )}
       {isLoggedIn && (
@@ -105,30 +112,32 @@ export default function ProfileOptions() {
         animationType="fade"
         transparent={true}
         visible={showOptions}
-        onPress={() => setShowOptions(!showOptions)}>
-        <View
+        // onRequestClose={() => setShowOptions(!showOptions)}
+      >
+        {/* <View
           style={styles.modalCenteredView}
           onStartShouldSetResponder={() => {
             setShowOptions(!showOptions);
-          }}>
-          <View style={styles.menuModalView}>
-            <TouchableOpacity onPress={gotoprofile}>
-              <Text style={styles.modalText}>Profile</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={gotoReviews}>
-              <Text style={styles.modalText}>Review</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={gotoSettings}>
-              <Text style={styles.modalText}>Settings</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={gotoSubscriptions}>
-              <Text style={styles.modalText}>Subs</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={logout}>
-              <Text style={styles.modalText}>Logout</Text>
-            </TouchableOpacity>
-          </View>
+          }}
+        > */}
+        <View style={styles.menuModalView}>
+          <TouchableOpacity onPress={gotoprofile}>
+            <Text style={styles.modalText}>Profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={gotoReviews}>
+            <Text style={styles.modalText}>Review</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={gotoSettings}>
+            <Text style={styles.modalText}>Settings</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={gotoSubscriptions}>
+            <Text style={styles.modalText}>Subs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={logout}>
+            <Text style={styles.modalText}>Logout</Text>
+          </TouchableOpacity>
         </View>
+        {/* </View> */}
       </Modal>
 
       <Modal
