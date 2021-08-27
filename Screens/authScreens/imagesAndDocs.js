@@ -4,12 +4,11 @@ import {
   Text,
   TouchableOpacity,
   Dimensions,
-  Picker,
   Image,
   Modal,
+  ScrollView,
 } from 'react-native';
 import styles from './authStyles';
-import {ScrollView} from 'react-native-gesture-handler';
 import DocumentPicker from 'react-native-document-picker';
 import CameraIcon from 'react-native-vector-icons/FontAwesome';
 import DropIcon from 'react-native-vector-icons/AntDesign';

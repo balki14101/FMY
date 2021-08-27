@@ -30,6 +30,7 @@ import ImageModal from 'react-native-image-modal';
 export default function ProfileHome({navigation}) {
   const [isLoading, setLoading] = useState(false);
   const [lawyer, setLawyer] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [currentImages, setCurrentImages] = useState([
     {
       // Simplest usage.
@@ -88,7 +89,87 @@ export default function ProfileHome({navigation}) {
   const setTheLawyer = (lawyer) => {
     //alert(JSON.stringify(lawyer))
     setLawyer(lawyer);
+    console.log(lawyer);
+
+    if (lawyer.is_civil == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Civil');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_criminal == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Criminal');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_intellectual_property == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Intellectual Property');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_family == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Family');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_property == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Property');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_immigration == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Immigration');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_labour == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Labour');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_employment == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Employment');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_mergers == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Mergers and Acquisition');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_bankruptcy == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Bankruptcy Lawyer');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_corporate == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Corporate');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_notary == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Notary');
+      setSelectedCategories(theSel);
+    }
+
+    if (lawyer.is_others == 1) {
+      var theSel = selectedCategories;
+      theSel.push('Others');
+      setSelectedCategories(theSel);
+    }
   };
+  console.log('homeCategories', selectedCategories);
 
   const showImageInModal = (item) => {
     setIsModalVisible(true);
@@ -245,11 +326,15 @@ export default function ProfileHome({navigation}) {
                     source={CourtIcon}
                   />
 
+                  {/* <Text style={styles.smallText1}>
+                    {selectedCategories.join(', ')}
+                  </Text> */}
+
                   {lawyer.is_civil == 1 && (
                     <Text style={styles.smallText1}>Civil</Text>
                   )}
                   {lawyer.is_civil == 1 && lawyer.is_criminal == 1 && (
-                    <Text style={styles.smallText1}>, </Text>
+                    <Text style={styles.smallText1}>{','} </Text>
                   )}
                   {lawyer.is_criminal == 1 && (
                     <Text style={styles.smallText1}>Criminal</Text>
@@ -342,7 +427,7 @@ export default function ProfileHome({navigation}) {
 
                   {lawyer.is_mergers == 1 && (
                     <Text style={styles.smallText1}>
-                      Mergers & Acquisitions
+                      {'Mergers & Acquisitions'}
                     </Text>
                   )}
 
@@ -356,7 +441,7 @@ export default function ProfileHome({navigation}) {
                     lawyer.is_employment == 1 ||
                     lawyer.is_mergers) &&
                     lawyer.is_bankruptcy == 1 && (
-                      <Text style={styles.smallText1}>,</Text>
+                      <Text style={styles.smallText1}>{','}</Text>
                     )}
 
                   {lawyer.is_bankruptcy == 1 && (

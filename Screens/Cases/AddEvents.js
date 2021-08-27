@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: 24,
     paddingHorizontal: 10,
   },
   input: {

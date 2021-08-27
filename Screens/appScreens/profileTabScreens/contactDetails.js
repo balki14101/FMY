@@ -153,7 +153,6 @@ export default function ContactDetails() {
     // if (lawyer.is_civil == 1) {
     //   setIsCivil(true);
     //   var theSel = selectedCategories;
-
     //   theSel.push('Civil');
     //   setSelectedCategories(theSel);
     // }
@@ -400,6 +399,7 @@ export default function ContactDetails() {
         setIsOthers(true);
       }
     }
+    console.log('catNames', catNames);
   };
 
   const handleFirmNameChange = (value) => {

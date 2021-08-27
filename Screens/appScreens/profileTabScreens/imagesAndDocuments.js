@@ -1,7 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Image, Modal} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Modal,
+  ScrollView,
+} from 'react-native';
 import styles from '../../authScreens/authStyles';
-import {ScrollView} from 'react-native-gesture-handler';
 import DocumentPicker from 'react-native-document-picker';
 import CameraIcon from 'react-native-vector-icons/FontAwesome';
 import DropIcon from 'react-native-vector-icons/AntDesign';
@@ -62,7 +68,7 @@ export default function ImagesAndDocuments({navigation}) {
   }, []);
 
   const setLawyerProfileData = (lawyer) => {
-    console.log(lawyer.user.first_name);
+    console.log(lawyer.profile_picture_path);
     setLawyer(lawyer);
   };
 
@@ -117,8 +123,11 @@ export default function ImagesAndDocuments({navigation}) {
   const chooseImageForProfilePicture = async () => {
     ImagePicker.openPicker({
       multiple: false,
-    }).then((images) => {
-      setProfile(images);
+    }).then((image) => {
+      setProfile({
+        uri: image.path,
+        mine: image.mime,
+      });
       setIsImageSelected(true);
       setShowPickerForProfilePicture(false);
     });
@@ -130,7 +139,10 @@ export default function ImagesAndDocuments({navigation}) {
       height: 400,
       cropping: true,
     }).then((image) => {
-      setProfile(image);
+      setProfile({
+        uri: image.path,
+        mine: image.mime,
+      });
       setIsImageSelected(true);
       setShowPickerForProfilePicture(false);
     });
@@ -141,8 +153,11 @@ export default function ImagesAndDocuments({navigation}) {
   const chooseImageForBarCouncilCertificate = async () => {
     ImagePicker.openPicker({
       multiple: false,
-    }).then((images) => {
-      setBarCouncilCertificate(images);
+    }).then((image) => {
+      setBarCouncilCertificate({
+        uri: image.path,
+        mine: image.mime,
+      });
       setIsBarSelected(true);
       setShowPickerForBar(false);
     });
@@ -153,8 +168,11 @@ export default function ImagesAndDocuments({navigation}) {
       width: 300,
       height: 400,
       cropping: true,
-    }).then((images) => {
-      setBarCouncilCertificate(images);
+    }).then((image) => {
+      setBarCouncilCertificate({
+        uri: image.path,
+        mine: image.mime,
+      });
       setIsBarSelected(true);
       setShowPickerForBar(false);
     });
@@ -165,8 +183,11 @@ export default function ImagesAndDocuments({navigation}) {
   const chooseImageForAadharCard = async () => {
     ImagePicker.openPicker({
       multiple: false,
-    }).then((images) => {
-      setAadharCard(images);
+    }).then((image) => {
+      setAadharCard({
+        uri: image.path,
+        mine: image.mime,
+      });
       setIsAadharSelected(true);
       setShowPickerForAadhar(false);
     });
@@ -177,8 +198,11 @@ export default function ImagesAndDocuments({navigation}) {
       width: 300,
       height: 400,
       cropping: true,
-    }).then((images) => {
-      setAadharCard(images);
+    }).then((image) => {
+      setAadharCard({
+        uri: image.path,
+        mine: image.mime,
+      });
       setIsAadharSelected(true);
       setShowPickerForAadhar(false);
     });
@@ -222,100 +246,108 @@ export default function ImagesAndDocuments({navigation}) {
     // Later validate the coordinates validity as well
 
     var fieldsEmpty = false;
-    var formData = new FormData();
 
-    if (profile.length > 0) {
+    if (
+      aadharCard == null ||
+      profile == null ||
+      barCouncilCertificate == null
+    ) {
+      fieldsEmpty = true;
+    }
+
+    if (fieldsEmpty) {
+      Toast.show({
+        type: 'error',
+        text1: 'One or more fields are empty',
+      });
+    } else {
+      setLoading(true);
+      setLoadingMessage('Updating your primary info...');
+      var formData = new FormData();
+
       var theProfile = {};
-      theProfile = profile[0];
+
+      theProfile = profile;
       theProfile.type = theProfile.mime;
-      theProfile.uri = theProfile.path;
+      theProfile.uri = theProfile.uri;
 
-      console.log(profile[0].mime);
-
-      if (profile[0].mime == 'image/jpeg') {
+      if (profile.mime == 'image/jpeg') {
         theProfile.name = Math.random().toString(36).substring(7) + '.jpg';
       }
 
-      if (profile[0].mime == 'image/png') {
+      if (profile.mime == 'image/png') {
         theProfile.name = Math.random().toString(36).substring(7) + '.png';
       }
 
-      console.log('ss' + theProfile.name);
+      //alert(JSON.stringify(theProfile));
 
       formData.append('profile_picture', theProfile);
-    }
 
-    if (aadharCard.length > 0) {
       // Bar council
       var theAadhar = {};
 
-      theAadhar = aadharCard[0];
+      theAadhar = aadharCard;
       theAadhar.type = theAadhar.mime;
-      theAadhar.uri = theAadhar.path;
+      theAadhar.uri = theAadhar.uri;
 
-      if (aadharCard[0].mime == 'image/jpeg') {
+      if (aadharCard.mime == 'image/jpeg') {
         theAadhar.name = Math.random().toString(36).substring(7) + '.jpg';
       }
 
-      if (aadharCard[0].mime == 'image/png') {
+      if (aadharCard.mime == 'image/png') {
         theAadhar.name = Math.random().toString(36).substring(7) + '.png';
       }
 
       //alert(JSON.stringify(theAadhar));
 
       formData.append('aadhar', theAadhar);
-    }
 
-    if (barCouncilCertificate.length > 0) {
       // Aadhar
       var theBar = {};
 
-      theBar = barCouncilCertificate[0];
+      theBar = barCouncilCertificate;
       theBar.type = theBar.mime;
-      theBar.uri = theBar.path;
+      theBar.uri = theBar.uri;
 
-      if (barCouncilCertificate[0].mime == 'image/jpeg') {
+      if (barCouncilCertificate.mime == 'image/jpeg') {
         theBar.name = Math.random().toString(36).substring(7) + '.jpg';
       }
 
-      if (barCouncilCertificate[0].mime == 'image/png') {
+      if (barCouncilCertificate.mime == 'image/png') {
         theBar.name = Math.random().toString(36).substring(7) + '.png';
       }
 
       //alert(JSON.stringify(theBar));
 
       formData.append('bar', theBar);
-    }
 
-    var authToken = await AsyncStorage.getItem('@auth_token');
+      var authToken = await AsyncStorage.getItem('@auth_token');
 
-    const requestOptions = {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + authToken,
-      },
-    };
+      const requestOptions = {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json',
+          Authorization: 'Bearer ' + authToken,
+        },
+      };
 
-    // setLoading(true);
-    setLoadingMessage('Uploading your files...	');
+      setLoading(true);
 
-    fetch(
-      'https://lawyerback.trikara.com/api/lawyer-upload-files',
-      requestOptions,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setUserData(data);
-      })
-      .then((response) => {
-        // do whatever you want with success response
-        setLoading(false);
-      })
-      .catch(console.log);
-
-    //} // else closes
+      fetch(
+        'https://lawyerback.trikara.com/api/lawyer-upload-files',
+        requestOptions,
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setUserData(data);
+        })
+        .then((response) => {
+          // do whatever you want with success response
+          setLoading(false);
+        })
+        .catch(console.log);
+    } // else closes
   };
 
   const setUserData = async (data) => {
@@ -359,54 +391,6 @@ export default function ImagesAndDocuments({navigation}) {
         <View style={{height: '100%', width: '100%', alignItems: 'center'}}>
           <CircleFade size={100} color="#28899B" style={{marginTop: '70%'}} />
           <Text style={styles.loadingText}>{loadingMessage}</Text>
-        </View>
-      )}
-
-      {showPickerForDocuments && (
-        <View style={styles.btnParentSection1}>
-          <TouchableOpacity
-            onPress={chooseImageForDocuments}
-            style={styles.btnSection}>
-            <Text style={styles.btnText}>From Gallery</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={launchCameraForDocuments}
-            style={styles.btnSection}>
-            <Text style={styles.btnText}>From Camera</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {showPickerForPictures && (
-        <View style={styles.btnParentSection}>
-          <TouchableOpacity
-            onPress={chooseImageForPictures}
-            style={styles.btnSection}>
-            <Text style={styles.btnText}>From Gallery</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={launchCameraForPictures}
-            style={styles.btnSection}>
-            <Text style={styles.btnText}>From Camera</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {showPickerForProfilePicture && (
-        <View style={styles.btnParentSection}>
-          <TouchableOpacity
-            onPress={chooseImageForProfilePicture}
-            style={styles.btnSection}>
-            <Text style={styles.btnText}>From Gallery</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={launchCameraForProfilePicture}
-            style={styles.btnSection}>
-            <Text style={styles.btnText}>From Camera</Text>
-          </TouchableOpacity>
         </View>
       )}
 
@@ -508,7 +492,7 @@ export default function ImagesAndDocuments({navigation}) {
               onPress={selectProfileImage}>
               {isImageSelected ? (
                 <Image
-                  source={{uri: profile[0].path}}
+                  source={{uri: profile.uri}}
                   style={styles.imageContainer}
                 />
               ) : (
@@ -541,7 +525,7 @@ export default function ImagesAndDocuments({navigation}) {
             <TouchableOpacity style={styles.imageContainer} onPress={selectBar}>
               {isBarSelected ? (
                 <Image
-                  source={{uri: barCouncilCertificate[0].path}}
+                  source={{uri: barCouncilCertificate.uri}}
                   style={styles.imageContainer}
                 />
               ) : (
@@ -577,7 +561,7 @@ export default function ImagesAndDocuments({navigation}) {
               onPress={selectAadhar}>
               {isAadharSelected ? (
                 <Image
-                  source={{uri: aadharCard[0].path}}
+                  source={{uri: aadharCard.uri}}
                   style={styles.imageContainer}
                 />
               ) : (
